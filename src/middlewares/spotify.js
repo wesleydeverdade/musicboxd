@@ -1,9 +1,8 @@
 import axios from "axios";
 import qs from "querystring";
 
-class Spotify {
-  
-  async auth(){
+const self = {
+  auth: async function(){
     const clientId =  "5e3a5116a53f4354aa4dd0feda2225dd";
     const clientSecret = "c7be98e714264cad93287bc43bfe8f9d";      
 
@@ -23,26 +22,32 @@ class Spotify {
     const data = {
       grant_type: 'client_credentials',
     };
-  
+
     try {
       const response = await axios.post(
         endpoint,
         qs.stringify(data),
         headers
       );
-      return response.data.access_token;
+      return ({ success: true,  message: response.data.access_token });
     } catch (error) {
-      return false;
+      return ({ success: false, message: 'Falha ao autenticar-se' });
+    }      
+  },
+  search: async function(req, res){
+
+    if(!req.body.album){
+      res.send({ success: false,  message: 'Parâmetro album não foi enviado' });
     }
-  };
+    
+    const auth = await self.auth();
+    var key = "";
 
-  async search(album) {
-
-    if(!album){
-      return false;
+    if(!auth.success){
+      res.send({ success: false,  message: 'Erro na autenticação' });
+    }else{
+      key = auth.message; 
     }
-
-    const key = await this.auth();
     
     const endpoint = "https://api.spotify.com/v1/search?";
 
@@ -55,7 +60,7 @@ class Spotify {
     };
 
     const data = {
-      q: album,
+      q: req.body.album,
       type: "album",
       market: 'us',
       limit: 10,
@@ -67,14 +72,11 @@ class Spotify {
         endpoint+qs.stringify(data),
         headers
       );
-      //console.log(response.data);
-      return response.data;      
+      res.send({ success: true,  message: response.data });
     } catch (err) {
-      //console.log(err.response);
-      return false;
+      res.send({ success: false,  message: 'Erro ao requisitar álbum' });
     }
-
   }
-}
- 
-export default new Spotify().search("Nevermind");
+};
+
+export default self;
