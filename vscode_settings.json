@@ -1,17 +1,13 @@
 {
-  "workbench.colorTheme": "Shades of Purple",
-
+  "workbench.colorTheme": "Dracula",
   "editor.fontSize": 18,
   "editor.lineHeight": 24,
   "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
   "explorer.compactFolders": false,
-
   "editor.rulers": [80, 120],
-  "editor.formatOnSave": false,
-
+  "editor.formatOnSave": true,
   "eslint.packageManager": "yarn",
-
   "[javascript]": {
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": true
@@ -32,17 +28,13 @@
       "source.fixAll.eslint": true
     }
   },
-
   "files.associations": {
     ".sequelizerc": "javascript",
     ".stylelintrc": "json",
     ".prettierrc": "json"
   },
-
   "editor.renderLineHighlight": "gutter",
-
   "terminal.integrated.fontSize": 14,
-
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "newUntitledFile",
   "editor.tabSize": 2,
@@ -66,7 +58,6 @@
   "explorer.confirmDragAndDrop": false,
   "liveshare.featureSet": "insiders",
   "explorer.confirmDelete": false,
-
   "typescript.tsserver.log": "verbose",
   "javascript.suggest.autoImports": false,
   "typescript.suggest.autoImports": false,

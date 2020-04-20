@@ -1,10 +1,11 @@
 import axios from 'axios';
 import qs from 'querystring';
+import 'dotenv/config';
 
 const self = {
   async auth() {
-    const clientId = '5e3a5116a53f4354aa4dd0feda2225dd';
-    const clientSecret = 'c7be98e714264cad93287bc43bfe8f9d';
+    const clientId = process.env.SPOTIFY_CLIENT_ID;
+    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
 
     const endpoint = 'https://accounts.spotify.com/api/token';
 
