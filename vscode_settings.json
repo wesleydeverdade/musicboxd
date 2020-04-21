@@ -61,5 +61,6 @@
   "typescript.tsserver.log": "verbose",
   "javascript.suggest.autoImports": false,
   "typescript.suggest.autoImports": false,
-  "workbench.activityBar.visible": true
+  "workbench.activityBar.visible": true,
+  "files.eol": "\n"
 }

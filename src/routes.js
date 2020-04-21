@@ -1,10 +1,17 @@
 import { Router } from 'express';
-import spotify from './middlewares/spotify';
+import UserController from './app/controllers/UserController';
+import SessionController from './app/controllers/SessionController';
+import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 
-routes.get('/', (req, res) => res.json({ message: 'Hello teste' }));
+routes.post('/users', UserController.store);
+routes.post('/session', SessionController.store);
 
-routes.post('/spotify', spotify.search);
+routes.use(authMiddleware);
+routes.put('/users', UserController.update);
+
+// import spotify from './app/middlewares/Spotify';
+// routes.post('/spotify', spotify.search);
 
 export default routes;
