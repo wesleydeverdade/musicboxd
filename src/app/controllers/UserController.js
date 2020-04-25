@@ -44,8 +44,8 @@ class UserController {
         .json({ success: false, message: 'Usuário já existe' });
     }
 
-    const { id, name, email, provider } = await User.create(req.body);
-    return res.json({ id, name, email, provider });
+    const { id, name, email } = await User.create(req.body);
+    return res.json({ id, name, email });
   }
 
   async update(req, res) {
@@ -89,9 +89,9 @@ class UserController {
         .json({ success: false, message: 'Senha não bate' });
     }
 
-    const { id, name, provider } = await user.update(req.body);
+    const { id, name } = await user.update(req.body);
 
-    return res.json({ id, name, email, provider });
+    return res.json({ id, name, email });
   }
 }
 
