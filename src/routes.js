@@ -16,8 +16,10 @@ routes.post('/users', UserController.store);
 routes.post('/session', SessionController.store);
 
 routes.use(authMiddleware);
-routes.put('/users', UserController.update);
 
+routes.get('/users', UserController.index);
+
+routes.put('/users', UserController.update);
 routes.post('/files', upload.single('file'), FileController.store);
 
 // import spotify from './app/middlewares/Spotify';
