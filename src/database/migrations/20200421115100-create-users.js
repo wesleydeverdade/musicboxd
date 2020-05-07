@@ -7,7 +7,7 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      username: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -18,6 +18,50 @@ module.exports = {
       },
       password_hash: {
         type: Sequelize.STRING,
+        allowNull: false,
+      },
+      first_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      last_name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      location: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      website: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      bio: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      people_section: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      first_favorite_album: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      second_favorite_album: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      third_favorite_album: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      fourth_favorite_album: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      fifth_favorite_album: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
       },
       created_at: {

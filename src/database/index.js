@@ -1,15 +1,20 @@
 import Sequelize from 'sequelize';
-import mongoose from 'mongoose';
+/*  import mongoose from 'mongoose'; */
 import databaseConfig from '../config/database';
 import User from '../app/models/User';
 import File from '../app/models/File';
+import Tag from '../app/models/Tag';
+import Review from '../app/models/Review';
+import Wishlist from '../app/models/Wishlist';
+import List from '../app/models/List';
+import AlbumList from '../app/models/AlbumList';
 
-const models = [User, File];
+const models = [User, File, Tag, Review, Wishlist, List, AlbumList];
 
 class Database {
   constructor() {
     this.init();
-    this.mongo();
+    // this.mongo();
   }
 
   init() {
@@ -22,8 +27,8 @@ class Database {
       );
   }
 
-  mongo() {
-    this.mongoConnection = mongoose.connect(
+  /* mongo() {
+     this.mongoConnection = mongoose.connect(
       'mongodb://localhost:27017/musicbox',
       {
         useNewUrlParser: true,
@@ -31,7 +36,7 @@ class Database {
         useUnifiedTopology: true,
       }
     );
-  }
+  } */
 }
 
 export default new Database();

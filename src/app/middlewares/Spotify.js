@@ -32,15 +32,15 @@ const self = {
     }
   },
   async search(req, res) {
-    if (!req.body.album) {
-      res.send({ success: false, message: 'Parâmetro album não foi enviado' });
+    if (!req.query.album) {
+      res.json({ success: false, message: 'Parâmetro album não foi enviado' });
     }
 
     const auth = await self.auth();
     let key = '';
 
     if (!auth.success) {
-      res.send({ success: false, message: 'Erro na autenticação' });
+      res.json({ success: false, message: 'Erro na autenticação' });
     } else {
       key = auth.message;
     }
@@ -56,15 +56,86 @@ const self = {
     };
 
     const data = {
-      q: req.body.album,
+      q: req.query.album,
       type: 'album',
     };
 
     try {
       const response = await axios.get(endpoint + qs.stringify(data), headers);
-      res.send({ success: true, message: response.data });
+      res.json({ success: true, message: response.data });
     } catch (err) {
-      res.send({ success: false, message: 'Erro ao requisitar álbum' });
+      res.json({ success: false, message: 'Erro ao requisitar álbum' });
+    }
+  },
+  async album(req, res) {
+    if (!req.query.id) {
+      res.json({
+        success: false,
+        message: 'Parâmetro id/album não foi enviado',
+      });
+    }
+
+    const auth = await self.auth();
+    let key = '';
+
+    if (!auth.success) {
+      res.json({ success: false, message: 'Erro na autenticação' });
+    } else {
+      key = auth.message;
+    }
+
+    const endpoint = `https://api.spotify.com/v1/albums/${req.query.id}`;
+
+    axios.defaults.headers.common.Authorization = `Bearer ${key}`;
+    const headers = {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    try {
+      const response = await axios.get(endpoint, headers);
+      res.json({ success: true, message: response.data });
+    } catch (err) {
+      res.json({ success: false, message: 'Erro trazer informações do álbum' });
+    }
+  },
+  async artist(req, res) {
+    if (!req.query.id) {
+      res.json({
+        success: false,
+        message: 'Parâmetro id/artista não foi enviado',
+      });
+    }
+
+    const auth = await self.auth();
+    let key = '';
+
+    if (!auth.success) {
+      res.json({ success: false, message: 'Erro na autenticação' });
+    } else {
+      key = auth.message;
+    }
+
+    const endpoint = `https://api.spotify.com/v1/artists/${req.query.id}`;
+
+    axios.defaults.headers.common.Authorization = `Bearer ${key}`;
+    const headers = {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    };
+
+    try {
+      const response = await axios.get(endpoint, headers);
+      res.json({ success: true, message: response.data });
+    } catch (err) {
+      res.json({
+        success: false,
+        message: 'Erro trazer informações do artista',
+      });
     }
   },
 };
