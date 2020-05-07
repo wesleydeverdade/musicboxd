@@ -23,7 +23,16 @@ class Review extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.belongsToMany(models.Tag, {
+      foreignKey: 'review_id',
+      through: 'review_tags',
+      as: 'review_id___review_tags',
+    });
+    this.belongsToMany(models.User, {
+      foreignKey: 'review_id',
+      through: 'review_likes',
+      as: 'review_id___review_likes',
+    });
   }
 }
 
