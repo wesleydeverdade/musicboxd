@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-import 'dotenv/config';
 
 class File extends Model {
   static init(sequelize) {

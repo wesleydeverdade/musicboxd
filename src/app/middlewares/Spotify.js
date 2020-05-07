@@ -1,6 +1,5 @@
 import axios from 'axios';
 import qs from 'querystring';
-import 'dotenv/config';
 
 const self = {
   async auth() {

@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-import 'dotenv/config';
 
 class Review extends Model {
   static init(sequelize) {

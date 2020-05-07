@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-import 'dotenv/config';
 
 class AlbumList extends Model {
   static init(sequelize) {
