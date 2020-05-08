@@ -22,47 +22,47 @@ module.exports = {
       },
       first_name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       last_name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       location: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       website: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       bio: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       people_section: {
         type: Sequelize.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
       },
       first_favorite_album: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       second_favorite_album: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       third_favorite_album: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       fourth_favorite_album: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       fifth_favorite_album: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       created_at: {
         type: Sequelize.DATE,

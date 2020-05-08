@@ -10,7 +10,23 @@ class UserController {
       where: {},
       limit: 20,
       offset: (page - 1) * 20,
-      attributes: ['id', 'name', 'email', 'avatar_id'],
+      attributes: [
+        'id',
+        'username',
+        'email',
+        'first_name',
+        'last_name',
+        'location',
+        'website',
+        'bio',
+        'people_section',
+        'first_favorite_album',
+        'second_favorite_album',
+        'third_favorite_album',
+        'fourth_favorite_album',
+        'fifth_favorite_album',
+        'avatar_id',
+      ],
       include: [
         {
           model: File,
@@ -25,7 +41,7 @@ class UserController {
 
   async store(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string().required(),
+      username: Yup.string().required().min(4),
       email: Yup.string().email().required(),
       password: Yup.string().required().min(6),
     });
@@ -50,7 +66,7 @@ class UserController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      name: Yup.string(),
+      username: Yup.string().required().min(4),
       email: Yup.string().email(),
       oldPassword: Yup.string().min(6),
       password: Yup.string()
