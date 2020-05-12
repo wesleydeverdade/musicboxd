@@ -5,11 +5,11 @@ import User from '../app/models/User';
 import File from '../app/models/File';
 import Tag from '../app/models/Tag';
 import Review from '../app/models/Review';
-import Wishlist from '../app/models/Wishlist';
 import List from '../app/models/List';
 import AlbumList from '../app/models/AlbumList';
+import Album from '../app/models/Album';
 
-const models = [User, File, Tag, Review, Wishlist, List, AlbumList];
+const models = [User, File, Tag, Review, List, AlbumList, Album];
 
 class Database {
   constructor() {
@@ -19,7 +19,11 @@ class Database {
 
   init() {
     this.connection = new Sequelize(databaseConfig);
-
+    /*
+     * To create a One-To-One relationship, the hasOne and belongsTo associations are used together; *
+     * To create a One-To-Many relationship, the hasMany and belongsTo associations are used together; *
+     * To create a Many-To-Many relationship, two belongsToMany calls are used together. *
+     */
     models
       .map((model) => model.init(this.connection))
       .map(

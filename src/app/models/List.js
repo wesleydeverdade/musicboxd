@@ -18,17 +18,22 @@ class List extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
-    this.hasMany(models.AlbumList, { foreignKey: 'list_id', as: 'lists' });
+    this.belongsTo(models.User, { foreignKey: 'user_id', as: 'list_user' });
+
+    this.belongsToMany(models.Tag, {
+      foreignKey: 'list_id',
+      through: 'list_tags',
+      as: 'list_id___list_tags',
+    });
     this.belongsToMany(models.User, {
       foreignKey: 'list_id',
       through: 'list_likes',
       as: 'list_id___list_likes',
     });
-    this.belongsToMany(models.Tag, {
+    this.belongsToMany(models.Album, {
       foreignKey: 'list_id',
-      through: 'list_tags',
-      as: 'list_id___list_tags',
+      through: 'album_list',
+      as: 'list_id___album_list',
     });
   }
 }

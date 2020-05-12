@@ -1,36 +1,36 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('reviews', {
+    return queryInterface.createTable('albums', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      content: {
-        type: Sequelize.TEXT,
+      spotify_id: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      note: {
-        type: Sequelize.DECIMAL(10, 2),
+      album_name: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      liked: {
-        type: Sequelize.BOOLEAN,
+      album_artist: {
+        type: Sequelize.JSON,
         allowNull: false,
       },
-      created_at: {
+      album_release_date: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: true,
       },
-      updated_at: {
-        type: Sequelize.DATE,
-        allowNull: false,
+      album_genres: {
+        type: Sequelize.JSON,
+        allowNull: true,
       },
     });
   },
 
   down: (queryInterface) => {
-    return queryInterface.dropTable('reviews');
+    return queryInterface.dropTable('albums');
   },
 };
