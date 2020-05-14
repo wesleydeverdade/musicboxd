@@ -41,18 +41,6 @@ class UserController {
   }
 
   async store(req, res) {
-    const schema = Yup.object().shape({
-      username: Yup.string().required().min(4),
-      email: Yup.string().email().required(),
-      password: Yup.string().required().min(6),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Falha de validação' });
-    }
-
     const userExists = await User.findOne({
       where: {
         [Op.or]: [{ username: req.body.username }, { email: req.body.email }],
@@ -70,37 +58,6 @@ class UserController {
   }
 
   async update(req, res) {
-    const schema = Yup.object().shape({
-      username: Yup.string().required().min(4),
-      email: Yup.string().email(),
-      oldPassword: Yup.string().min(6),
-      password: Yup.string()
-        .min(6)
-        .when('oldPassword', (oldPassword, field) =>
-          oldPassword ? field.required() : field
-        ),
-      confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
-      ),
-      first_name: Yup.string(),
-      last_name: Yup.string(),
-      location: Yup.string(),
-      website: Yup.string(),
-      bio: Yup.string(),
-      people_section: Yup.boolean(),
-      first_favorite_album: Yup.string(),
-      second_favorite_album: Yup.string(),
-      third_favorite_album: Yup.string(),
-      fourth_favorite_album: Yup.string(),
-      fifth_favorite_album: Yup.string(),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Falha de validação' });
-    }
-
     const { email, username, oldPassword } = req.body;
 
     const user = await User.findByPk(req.userId);
@@ -139,9 +96,19 @@ class UserController {
         .json({ success: false, message: 'Senha não bate' });
     }
 
-    const { id, name } = await user.update(req.body);
+    await user.update(req.body);
 
-    return res.json({ id, name, email });
+    const { id, name, avatar } = await User.findByPk(req.userId, {
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json({ id, name, email, avatar });
   }
 
   async delete(req, res) {

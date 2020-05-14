@@ -7,23 +7,26 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 
+import ValidateUserStore from './app/validators/UserStore';
+import ValidateUserUpdate from './app/validators/UserUpdate';
+import ValidateSessionStore from './app/validators/SessionStore';
+
 import authMiddleware from './app/middlewares/auth';
-import spotify from './app/middlewares/Spotify';
+
+import SpotifyFind from './app/controllers/SpotifyFind';
 
 const routes = new Router();
 const upload = multer(multerConfig);
 
-routes.get('/spotify', spotify.search);
-routes.get('/album', spotify.album);
-routes.get('/artist', spotify.artist);
+routes.get('/find-album', SpotifyFind.search);
 
-routes.post('/users', UserController.store);
-routes.post('/session', SessionController.store);
+routes.post('/users', ValidateUserStore, UserController.store);
+routes.post('/session', ValidateSessionStore, SessionController.store);
 
 routes.use(authMiddleware);
 
 routes.get('/users', UserController.index);
-routes.put('/users', UserController.update);
+routes.put('/users', ValidateUserUpdate, UserController.update);
 routes.delete('/users', UserController.delete);
 routes.post('/files', upload.single('file'), FileController.store);
 

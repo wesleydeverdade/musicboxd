@@ -1,7 +1,7 @@
 import axios from 'axios';
 import qs from 'querystring';
 
-const self = {
+class Spotify {
   async auth() {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
     const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -29,17 +29,18 @@ const self = {
     } catch (error) {
       return { success: false, message: 'Falha ao autenticar-se' };
     }
-  },
-  async search(req, res) {
-    if (!req.query.album) {
-      res.json({ success: false, message: 'Parâmetro album não foi enviado' });
+  }
+
+  async search({ album }) {
+    if (!album) {
+      throw new Error('Parâmetro album não foi enviado');
     }
 
-    const auth = await self.auth();
+    const auth = await this.auth();
     let key = '';
 
     if (!auth.success) {
-      res.json({ success: false, message: 'Erro na autenticação' });
+      throw new Error('Erro na autenticação');
     } else {
       key = auth.message;
     }
@@ -55,35 +56,33 @@ const self = {
     };
 
     const data = {
-      q: req.query.album,
+      q: album,
       type: 'album',
     };
 
     try {
       const response = await axios.get(endpoint + qs.stringify(data), headers);
-      res.json({ success: true, message: response.data });
+      return response.data;
     } catch (err) {
-      res.json({ success: false, message: 'Erro ao requisitar álbum' });
+      throw new Error('Erro ao requisitar álbum');
     }
-  },
-  async album(req, res) {
-    if (!req.query.id) {
-      res.json({
-        success: false,
-        message: 'Parâmetro id/album não foi enviado',
-      });
+  }
+
+  async album({ id }) {
+    if (!id) {
+      throw new Error('Parâmetro id/album não foi enviado');
     }
 
-    const auth = await self.auth();
+    const auth = await this.auth();
     let key = '';
 
     if (!auth.success) {
-      res.json({ success: false, message: 'Erro na autenticação' });
+      throw new Error('Erro na autenticação');
     } else {
       key = auth.message;
     }
 
-    const endpoint = `https://api.spotify.com/v1/albums/${req.query.id}`;
+    const endpoint = `https://api.spotify.com/v1/albums/${id}`;
 
     axios.defaults.headers.common.Authorization = `Bearer ${key}`;
     const headers = {
@@ -95,29 +94,27 @@ const self = {
 
     try {
       const response = await axios.get(endpoint, headers);
-      res.json({ success: true, message: response.data });
+      return response.data;
     } catch (err) {
-      res.json({ success: false, message: 'Erro trazer informações do álbum' });
+      throw new Error('Erro trazer informações do álbum');
     }
-  },
-  async artist(req, res) {
-    if (!req.query.id) {
-      res.json({
-        success: false,
-        message: 'Parâmetro id/artista não foi enviado',
-      });
+  }
+
+  async artist({ id }) {
+    if (!id) {
+      throw new Error('Parâmetro id/artista não foi enviado');
     }
 
-    const auth = await self.auth();
+    const auth = await this.auth();
     let key = '';
 
     if (!auth.success) {
-      res.json({ success: false, message: 'Erro na autenticação' });
+      throw new Error('Erro na autenticação');
     } else {
       key = auth.message;
     }
 
-    const endpoint = `https://api.spotify.com/v1/artists/${req.query.id}`;
+    const endpoint = `https://api.spotify.com/v1/artists/${id}`;
 
     axios.defaults.headers.common.Authorization = `Bearer ${key}`;
     const headers = {
@@ -129,14 +126,11 @@ const self = {
 
     try {
       const response = await axios.get(endpoint, headers);
-      res.json({ success: true, message: response.data });
+      return response.data;
     } catch (err) {
-      res.json({
-        success: false,
-        message: 'Erro trazer informações do artista',
-      });
+      throw new Error('Erro trazer informações do artista');
     }
-  },
-};
+  }
+}
 
-export default self;
+export default new Spotify();
