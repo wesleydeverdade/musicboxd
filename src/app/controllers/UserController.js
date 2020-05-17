@@ -1,4 +1,3 @@
-import * as Yup from 'yup';
 import { Op } from 'sequelize';
 import User from '../models/User';
 import File from '../models/File';
@@ -112,19 +111,6 @@ class UserController {
   }
 
   async delete(req, res) {
-    const schema = Yup.object().shape({
-      password: Yup.string().required(),
-      confirmPassword: Yup.string().when('password', (password, field) =>
-        password ? field.required().oneOf([Yup.ref('password')]) : field
-      ),
-    });
-
-    if (!(await schema.isValid(req.body))) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Falha de validação' });
-    }
-
     const user = await User.findOne({ where: { id: req.userId } });
 
     if (!user) {

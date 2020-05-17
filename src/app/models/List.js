@@ -32,7 +32,7 @@ class List extends Model {
     });
     this.belongsToMany(models.Album, {
       foreignKey: 'list_id',
-      through: 'album_lists',
+      through: 'list_albums',
       as: 'list_id___album_list',
     });
   }

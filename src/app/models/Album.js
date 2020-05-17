@@ -23,7 +23,7 @@ class Album extends Model {
 
     this.belongsToMany(models.List, {
       foreignKey: 'album_id',
-      through: 'album_lists',
+      through: 'list_albums',
       as: 'album_id___album_lists',
     });
 

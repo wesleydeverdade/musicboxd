@@ -6,10 +6,10 @@ import File from '../app/models/File';
 import Tag from '../app/models/Tag';
 import Review from '../app/models/Review';
 import List from '../app/models/List';
-import AlbumList from '../app/models/AlbumList';
+import ListAlbum from '../app/models/ListAlbum';
 import Album from '../app/models/Album';
 
-const models = [User, File, Tag, Review, List, AlbumList, Album];
+const models = [User, File, Tag, Review, List, ListAlbum, Album];
 
 class Database {
   constructor() {
