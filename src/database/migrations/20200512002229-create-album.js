@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      album_artist: {
+      album_artists: {
         type: Sequelize.JSON,
         allowNull: false,
       },

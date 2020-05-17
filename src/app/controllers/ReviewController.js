@@ -5,7 +5,36 @@ import Spotify from '../services/Spotify';
 
 class ReviewController {
   async index(req, res) {
-    return res.json({ ok: req.body });
+    const { page = 1, spotify_id, user_id } = req.query;
+
+    /* filters */
+    const options_review = { where: {} };
+    const options_album = { where: {} };
+
+    if (user_id) options_review.where.user_id = user_id;
+    if (spotify_id) options_album.where.spotify_id = spotify_id;
+
+    const reviews = await Review.findAll({
+      where: options_review.where,
+      limit: 20,
+      offset: (page - 1) * 20,
+      attributes: ['id', 'content', 'note', 'liked', 'user_id'],
+      include: [
+        {
+          model: Album,
+          as: 'review_album',
+          attributes: [
+            'album_name',
+            'album_artists',
+            'album_release_date',
+            'album_genres',
+          ],
+          where: options_album.where,
+        },
+      ],
+    });
+
+    return res.json(reviews);
   }
 
   async store(req, res) {
@@ -29,7 +58,7 @@ class ReviewController {
       album = await Album.create({
         spotify_id: spotify.id,
         album_name: spotify.name,
-        album_artist: spotify.artists,
+        album_artists: spotify.artists,
         album_genres: spotify.genres,
         album_release_date: spotify.release_date,
       });

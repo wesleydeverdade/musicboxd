@@ -12,6 +12,8 @@ import ValidateUserStore from './app/validators/UserStore';
 import ValidateUserUpdate from './app/validators/UserUpdate';
 import ValidateUserDelete from './app/validators/UserDelete';
 import ValidateSessionStore from './app/validators/SessionStore';
+
+import ValidateReviewIndex from './app/validators/ReviewIndex';
 import ValidateReviewStore from './app/validators/ReviewStore';
 import ValidateReviewUpdate from './app/validators/ReviewUpdate';
 import ValidateReviewDelete from './app/validators/ReviewDelete';
@@ -26,6 +28,8 @@ const upload = multer(multerConfig);
 routes.get('/find-album', SpotifyFind.search);
 routes.get('/get-album', SpotifyFind.album);
 routes.get('/get-artist', SpotifyFind.artist);
+
+routes.get('/reviews', ValidateReviewIndex, ReviewController.index);
 
 routes.post('/users', ValidateUserStore, UserController.store);
 routes.post('/session', ValidateSessionStore, SessionController.store);

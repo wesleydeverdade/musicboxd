@@ -6,7 +6,7 @@ class Album extends Model {
       {
         spotify_id: Sequelize.STRING,
         album_name: Sequelize.STRING,
-        album_artist: Sequelize.JSON,
+        album_artists: Sequelize.JSON,
         album_release_date: Sequelize.DATE,
         album_genres: Sequelize.JSON,
       },
