@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import Review from '../models/Review';
 import Album from '../models/Album';
+import Tag from '../models/Tag';
 import Spotify from '../services/Spotify';
 
 class ReviewController {
@@ -31,6 +32,11 @@ class ReviewController {
           ],
           where: options_album.where,
         },
+        {
+          model: Tag,
+          as: 'tags',
+          attributes: ['name'],
+        },
       ],
     });
 
@@ -38,7 +44,7 @@ class ReviewController {
   }
 
   async store(req, res) {
-    const { spotify_id, content, liked, note } = req.body;
+    const { spotify_id, content, liked, note, tags } = req.body;
     const albumExists = await Album.findOne({ where: { spotify_id } });
 
     let album = '';
@@ -86,11 +92,21 @@ class ReviewController {
       album_id,
     });
 
+    if (tags && tags.length > 0) {
+      tags.forEach(async (val) => {
+        const [tag] = await Tag.findOrCreate({ where: { name: val } });
+
+        await review.addTag(tag);
+      });
+      // insert tags on return instead a new query only to take the relationship
+      review.dataValues.tags = tags;
+    }
+
     return res.json({ review });
   }
 
   async update(req, res) {
-    const { review_id, content, liked, note } = req.body;
+    const { review_id, content, liked, note, tags } = req.body;
 
     const review = await Review.findOne({
       where: {
@@ -105,6 +121,20 @@ class ReviewController {
     }
 
     await review.update({ content, liked, note });
+
+    // removing old tags
+    await review.removeTags(await review.getTags());
+
+    // insert all tags
+    if (tags && tags.length > 0) {
+      tags.forEach(async (val) => {
+        const [tag] = await Tag.findOrCreate({ where: { name: val } });
+
+        await review.addTag(tag);
+      });
+      // insert tags on return instead a new query only to take the relationship
+      review.dataValues.tags = tags;
+    }
 
     return res.json({ review });
   }
