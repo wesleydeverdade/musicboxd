@@ -23,17 +23,17 @@ class List extends Model {
     this.belongsToMany(models.Tag, {
       foreignKey: 'list_id',
       through: 'list_tags',
-      as: 'list_id___list_tags',
+      as: 'tags',
     });
     this.belongsToMany(models.User, {
       foreignKey: 'list_id',
       through: 'list_likes',
-      as: 'list_id___list_likes',
+      as: 'users',
     });
     this.belongsToMany(models.Album, {
       foreignKey: 'list_id',
       through: 'list_albums',
-      as: 'list_id___album_list',
+      as: 'albums',
     });
   }
 }

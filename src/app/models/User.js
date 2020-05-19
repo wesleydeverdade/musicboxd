@@ -41,7 +41,7 @@ class User extends Model {
     this.belongsToMany(models.List, {
       foreignKey: 'user_id',
       through: 'list_likes',
-      as: 'user_id___list_likes',
+      as: 'lists',
     });
     this.belongsToMany(models.Review, {
       foreignKey: 'user_id',

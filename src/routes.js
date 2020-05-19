@@ -7,6 +7,7 @@ import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
 import FileController from './app/controllers/FileController';
 import ReviewController from './app/controllers/ReviewController';
+import ListController from './app/controllers/ListController';
 import ReviewLikeController from './app/controllers/ReviewLikeController';
 import WishlistController from './app/controllers/WishlistController';
 
@@ -19,6 +20,12 @@ import ValidateReviewIndex from './app/validators/ReviewIndex';
 import ValidateReviewStore from './app/validators/ReviewStore';
 import ValidateReviewUpdate from './app/validators/ReviewUpdate';
 import ValidateReviewDelete from './app/validators/ReviewDelete';
+
+import ValidateListIndex from './app/validators/ListIndex';
+import ValidateListStore from './app/validators/ListStore';
+import ValidateListUpdate from './app/validators/ListUpdate';
+import ValidateListDelete from './app/validators/ListDelete';
+
 import ValidateReviewLikeStore from './app/validators/ReviewLikeStore';
 import ValidateReviewLikeDelete from './app/validators/ReviewLikeDelete';
 import ValidateWishlistStore from './app/validators/WishlistStore';
@@ -52,6 +59,12 @@ routes.post('/reviews', ValidateReviewStore, ReviewController.store);
 routes.put('/reviews', ValidateReviewUpdate, ReviewController.update);
 routes.delete('/reviews', ValidateReviewDelete, ReviewController.delete);
 
+routes.get('/lists', ValidateListIndex, ListController.index);
+routes.post('/lists', ValidateListStore, ListController.store);
+routes.put('/lists', ValidateListUpdate, ListController.update);
+routes.delete('/lists', ValidateListDelete, ListController.delete);
+
+/* deixar nos métodos put e delete o /route/req.param */
 routes.post(
   '/like-review/:review_id',
   ValidateReviewLikeStore,

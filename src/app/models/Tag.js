@@ -15,7 +15,7 @@ class Tag extends Model {
     this.belongsToMany(models.List, {
       foreignKey: 'tag_id',
       through: 'list_tags',
-      as: 'tag_id___list_tags',
+      as: 'lists',
     });
   }
 }
