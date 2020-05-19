@@ -6,40 +6,37 @@ import Spotify from '../services/Spotify';
 
 class ReviewController {
   async index(req, res) {
-    const { page = 1, spotify_id, user_id } = req.query;
-
-    /* filters */
-    const options_review = { where: {} };
-    const options_album = { where: {} };
-
-    if (user_id) options_review.where.user_id = user_id;
-    if (spotify_id) options_album.where.spotify_id = spotify_id;
-
-    const reviews = await Review.findAll({
-      where: options_review.where,
-      limit: 20,
-      offset: (page - 1) * 20,
-      attributes: ['id', 'content', 'note', 'liked', 'user_id'],
-      include: [
-        {
-          model: Album,
-          as: 'review_album',
-          attributes: [
-            'album_name',
-            'album_artists',
-            'album_release_date',
-            'album_genres',
-          ],
-          where: options_album.where,
-        },
-        {
-          association: 'tags',
-          attributes: ['name'],
-        },
-      ],
-    });
-
-    return res.json(reviews);
+    return res.json(req.body);
+    // const { page = 1, spotify_id, user_id } = req.query;
+    // /* filters */
+    // const options_review = { where: {} };
+    // const options_album = { where: {} };
+    // if (user_id) options_review.where.user_id = user_id;
+    // if (spotify_id) options_album.where.spotify_id = spotify_id;
+    // const reviews = await Review.findAll({
+    //   where: options_review.where,
+    //   limit: 20,
+    //   offset: (page - 1) * 20,
+    //   attributes: ['id', 'content', 'note', 'liked', 'user_id'],
+    //   include: [
+    //     {
+    //       model: Album,
+    //       as: 'review_album',
+    //       attributes: [
+    //         'album_name',
+    //         'album_artists',
+    //         'album_release_date',
+    //         'album_genres',
+    //       ],
+    //       where: options_album.where,
+    //     },
+    //     {
+    //       association: 'tags',
+    //       attributes: ['name'],
+    //     },
+    //   ],
+    // });
+    // return res.json(reviews);
   }
 
   async store(req, res) {
@@ -105,7 +102,8 @@ class ReviewController {
   }
 
   async update(req, res) {
-    const { review_id, content, liked, note, tags } = req.body;
+    const { content, liked, note, tags } = req.body;
+    const { review_id } = req.params;
 
     const review = await Review.findOne({
       where: {
@@ -139,7 +137,7 @@ class ReviewController {
   }
 
   async delete(req, res) {
-    const { review_id } = req.body;
+    const { review_id } = req.params;
 
     const review = await Review.findOne({
       where: {

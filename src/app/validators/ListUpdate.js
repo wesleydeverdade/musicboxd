@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 export default async (req, res, next) => {
   try {
     const schema = Yup.object().shape({
-      list_id: Yup.number().required(),
       name: Yup.string().required(),
       description: Yup.string(),
       public_list: Yup.boolean().required(),
@@ -13,6 +12,12 @@ export default async (req, res, next) => {
     });
 
     await schema.validate(req.body, { abortEarly: false });
+
+    const params = Yup.object().shape({
+      list_id: Yup.number().required(),
+    });
+
+    await params.validate(req.params, { abortEarly: false });
 
     return next();
   } catch (err) {

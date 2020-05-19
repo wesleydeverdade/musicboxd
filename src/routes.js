@@ -60,15 +60,22 @@ routes.delete('/users', ValidateUserDelete, UserController.delete);
 routes.post('/files', upload.single('file'), FileController.store);
 
 routes.post('/reviews', ValidateReviewStore, ReviewController.store);
-routes.put('/reviews', ValidateReviewUpdate, ReviewController.update);
-routes.delete('/reviews', ValidateReviewDelete, ReviewController.delete);
+routes.put(
+  '/reviews/:review_id',
+  ValidateReviewUpdate,
+  ReviewController.update
+);
+routes.delete(
+  '/reviews/:review_id',
+  ValidateReviewDelete,
+  ReviewController.delete
+);
 
 routes.get('/lists', ValidateListIndex, ListController.index);
 routes.post('/lists', ValidateListStore, ListController.store);
-routes.put('/lists', ValidateListUpdate, ListController.update);
-routes.delete('/lists', ValidateListDelete, ListController.delete);
+routes.put('/lists/:list_id', ValidateListUpdate, ListController.update);
+routes.delete('/lists/:list_id', ValidateListDelete, ListController.delete);
 
-/* deixar nos métodos put e delete o /route/req.param */
 routes.post(
   '/like-review/:review_id',
   ValidateReviewLikeStore,

@@ -64,7 +64,6 @@ class ListController {
 
   async update(req, res) {
     const {
-      list_id,
       name,
       description,
       public_list,
@@ -72,6 +71,7 @@ class ListController {
       albums,
       tags,
     } = req.body;
+    const { list_id } = req.params;
 
     const list = await List.findOne({
       where: {
@@ -123,7 +123,7 @@ class ListController {
   }
 
   async delete(req, res) {
-    const { list_id } = req.body;
+    const { list_id } = req.params;
 
     const list = await List.findOne({
       where: {
