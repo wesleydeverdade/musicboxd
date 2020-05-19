@@ -4,8 +4,8 @@ module.exports = {
       type: Sequelize.INTEGER,
       references: { model: 'lists', key: 'id' },
       onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
-      allowNull: true,
+      onDelete: 'CASCADE',
+      allowNull: false,
     });
   },
 

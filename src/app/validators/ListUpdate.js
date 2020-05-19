@@ -6,7 +6,7 @@ export default async (req, res, next) => {
       list_id: Yup.number().required(),
       name: Yup.string().required(),
       description: Yup.string(),
-      public: Yup.boolean().required(),
+      public_list: Yup.boolean().required(),
       ranked_list: Yup.boolean().required(),
       albums: Yup.array().required(),
       tags: Yup.array(),

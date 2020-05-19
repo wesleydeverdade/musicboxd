@@ -4,7 +4,7 @@ class ListAlbum extends Model {
   static init(sequelize) {
     super.init(
       {
-        order: Sequelize.INTEGER,
+        album_order: Sequelize.INTEGER,
         note: Sequelize.TEXT,
       },
       { sequelize }

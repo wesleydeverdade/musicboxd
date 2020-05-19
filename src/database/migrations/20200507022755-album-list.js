@@ -7,9 +7,9 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      order: {
+      album_order: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
     });
   },

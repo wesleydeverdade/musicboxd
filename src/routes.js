@@ -9,6 +9,7 @@ import FileController from './app/controllers/FileController';
 import ReviewController from './app/controllers/ReviewController';
 import ListController from './app/controllers/ListController';
 import ReviewLikeController from './app/controllers/ReviewLikeController';
+import ListLikeController from './app/controllers/ListLikeController';
 import WishlistController from './app/controllers/WishlistController';
 
 import ValidateUserStore from './app/validators/UserStore';
@@ -28,6 +29,9 @@ import ValidateListDelete from './app/validators/ListDelete';
 
 import ValidateReviewLikeStore from './app/validators/ReviewLikeStore';
 import ValidateReviewLikeDelete from './app/validators/ReviewLikeDelete';
+import ValidateListLikeStore from './app/validators/ListLikeStore';
+import ValidateListLikeDelete from './app/validators/ListLikeDelete';
+
 import ValidateWishlistStore from './app/validators/WishlistStore';
 import ValidateWishlistDelete from './app/validators/WishlistDelete';
 
@@ -74,6 +78,17 @@ routes.delete(
   '/like-review/:review_id',
   ValidateReviewLikeDelete,
   ReviewLikeController.delete
+);
+
+routes.post(
+  '/like-list/:list_id',
+  ValidateListLikeStore,
+  ListLikeController.store
+);
+routes.delete(
+  '/like-list/:list_id',
+  ValidateListLikeDelete,
+  ListLikeController.delete
 );
 
 routes.post(
