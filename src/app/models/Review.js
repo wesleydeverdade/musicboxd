@@ -31,7 +31,7 @@ class Review extends Model {
     this.belongsToMany(models.User, {
       foreignKey: 'review_id',
       through: 'review_likes',
-      as: 'review_id___review_likes',
+      as: 'users',
     });
   }
 }

@@ -30,7 +30,7 @@ class Album extends Model {
     this.belongsToMany(models.User, {
       foreignKey: 'album_id',
       through: 'wishlists',
-      as: 'album_id___wishlists',
+      as: 'users',
     });
   }
 }

@@ -46,12 +46,12 @@ class User extends Model {
     this.belongsToMany(models.Review, {
       foreignKey: 'user_id',
       through: 'review_likes',
-      as: 'user_id___review_likes',
+      as: 'reviews',
     });
     this.belongsToMany(models.Album, {
       foreignKey: 'user_id',
       through: 'wishlists',
-      as: 'user___wishlists',
+      as: 'albums',
     });
   }
 

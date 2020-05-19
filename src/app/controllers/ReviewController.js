@@ -33,8 +33,7 @@ class ReviewController {
           where: options_album.where,
         },
         {
-          model: Tag,
-          as: 'tags',
+          association: 'tags',
           attributes: ['name'],
         },
       ],
