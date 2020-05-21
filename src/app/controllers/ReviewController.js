@@ -90,6 +90,7 @@ class ReviewController {
       liked,
       user_id: req.userId,
       album_id,
+      allowed_replies: req.allowedReplies,
     });
 
     if (tags && tags.length > 0) {

@@ -21,7 +21,7 @@ class User extends Model {
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
         public_wishlist: Sequelize.BOOLEAN,
-        replies: Sequelize.NUMBER, // 0 (anyone can reply), 1 (friends [people YOU follow]), 2 (Only You)
+        replies: Sequelize.INTEGER, // 0 (anyone can reply), 1 (friends [people YOU follow]), 2 (Only You)
       },
       {
         sequelize,

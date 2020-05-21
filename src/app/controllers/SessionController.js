@@ -30,16 +30,14 @@ class SessionController {
         .json({ success: false, message: 'Senha não bate' });
     }
 
-    const { id, name, avatar } = user;
+    const { id, name, avatar, replies } = user;
 
     return res.json({
-      user: {
-        id,
-        name,
-        email,
-        avatar,
-      },
-      token: jwt.sign({ id }, authConfig.secret, {
+      id,
+      name,
+      email,
+      avatar,
+      token: jwt.sign({ id, replies }, authConfig.secret, {
         expiresIn: authConfig.expiresIn,
       }),
     });

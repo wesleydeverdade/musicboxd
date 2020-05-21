@@ -35,6 +35,7 @@ class ListController {
       public: public_list,
       ranked_list,
       user_id: req.userId,
+      allowed_replies: req.allowedReplies,
     });
 
     albums.forEach(async (val, index) => {

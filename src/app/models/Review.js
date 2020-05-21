@@ -7,6 +7,8 @@ class Review extends Model {
         content: Sequelize.TEXT,
         note: Sequelize.DECIMAL(10, 2),
         liked: Sequelize.BOOLEAN,
+        mute_comments_notification: Sequelize.BOOLEAN,
+        allowed_replies: Sequelize.INTEGER,
       },
       {
         sequelize,

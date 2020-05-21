@@ -8,6 +8,8 @@ class List extends Model {
         description: Sequelize.TEXT,
         public: Sequelize.BOOLEAN,
         ranked_list: Sequelize.BOOLEAN,
+        mute_comments_notification: Sequelize.BOOLEAN,
+        allowed_replies: Sequelize.INTEGER,
       },
       {
         sequelize,

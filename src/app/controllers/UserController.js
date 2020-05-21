@@ -1,6 +1,8 @@
+import jwt from 'jsonwebtoken';
 import { Op } from 'sequelize';
 import User from '../models/User';
 import File from '../models/File';
+import authConfig from '../../config/auth';
 
 class UserController {
   async index(req, res) {
@@ -118,7 +120,7 @@ class UserController {
 
     await user.update(req.body);
 
-    const { id, name, avatar } = await User.findByPk(req.userId, {
+    const { id, name, avatar, replies } = await User.findByPk(req.userId, {
       include: [
         {
           model: File,
@@ -128,7 +130,15 @@ class UserController {
       ],
     });
 
-    return res.json({ id, name, email, avatar });
+    return res.json({
+      id,
+      name,
+      email,
+      avatar,
+      token: jwt.sign({ id, replies }, authConfig.secret, {
+        expiresIn: authConfig.expiresIn,
+      }),
+    });
   }
 
   async destroy(req, res) {
