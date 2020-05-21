@@ -53,6 +53,16 @@ class User extends Model {
       through: 'wishlists',
       as: 'albums',
     });
+    this.belongsToMany(models.User, {
+      foreignKey: 'user_id',
+      through: 'network',
+      as: 'followers',
+    });
+    this.belongsToMany(models.User, {
+      foreignKey: 'follow_user_id',
+      through: 'network',
+      as: 'users',
+    });
   }
 
   checkPassword(password) {

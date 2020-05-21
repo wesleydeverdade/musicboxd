@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import multer from 'multer';
 import multerConfig from './config/multer';
 
@@ -11,6 +10,7 @@ import ListController from './app/controllers/ListController';
 import ReviewLikeController from './app/controllers/ReviewLikeController';
 import ListLikeController from './app/controllers/ListLikeController';
 import WishlistController from './app/controllers/WishlistController';
+import NetworkController from './app/controllers/NetworkController';
 
 import ValidateUserIndex from './app/validators/UserIndex';
 import ValidateUserShow from './app/validators/UserShow';
@@ -34,15 +34,19 @@ import ValidateListDestroy from './app/validators/ListDestroy';
 
 import ValidateReviewLikeStore from './app/validators/ReviewLikeStore';
 import ValidateReviewLikeDestroy from './app/validators/ReviewLikeDestroy';
+
 import ValidateListLikeStore from './app/validators/ListLikeStore';
 import ValidateListLikeDestroy from './app/validators/ListLikeDestroy';
 
 import ValidateWishlistStore from './app/validators/WishlistStore';
 import ValidateWishlistDestroy from './app/validators/WishlistDestroy';
 
-import authMiddleware from './app/middlewares/auth';
+import ValidateNetworkStore from './app/validators/NetworkStore';
+import ValidateNetworkDestroy from './app/validators/NetworkDestroy';
 
 import SpotifyFind from './app/controllers/SpotifyFind';
+
+import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 const upload = multer(multerConfig);
@@ -118,6 +122,17 @@ routes.delete(
   '/wishlist/:spotify_id',
   ValidateWishlistDestroy,
   WishlistController.destroy
+);
+
+routes.post(
+  '/follow-user/:follow_user_id',
+  ValidateNetworkStore,
+  NetworkController.store
+);
+routes.delete(
+  '/follow-user/:follow_user_id',
+  ValidateNetworkDestroy,
+  NetworkController.destroy
 );
 
 export default routes;
