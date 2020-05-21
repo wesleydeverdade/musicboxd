@@ -71,6 +71,42 @@ class WishlistController {
       message: 'Álbum removido da sua wishlist com sucesso',
     });
   }
+
+  async makePublic(req, res) {
+    const public_wishlist = true;
+
+    const user = await User.findByPk(req.userId);
+
+    if (!(await user.update({ public_wishlist })))
+      return res.json({
+        success: false,
+        message:
+          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+      });
+
+    return res.json({
+      success: true,
+      message: 'Wishlist foi alterada para pública.',
+    });
+  }
+
+  async makePrivate(req, res) {
+    const public_wishlist = false;
+
+    const user = await User.findByPk(req.userId);
+
+    if (!(await user.update({ public_wishlist })))
+      return res.json({
+        success: false,
+        message:
+          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+      });
+
+    return res.json({
+      success: true,
+      message: 'Wishlist foi alterada para privada.',
+    });
+  }
 }
 
 export default new WishlistController();

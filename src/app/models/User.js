@@ -20,6 +20,7 @@ class User extends Model {
         fifth_favorite_album: Sequelize.STRING,
         password: Sequelize.VIRTUAL,
         password_hash: Sequelize.STRING,
+        public_wishlist: Sequelize.BOOLEAN,
       },
       {
         sequelize,

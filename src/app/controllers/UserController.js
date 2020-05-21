@@ -64,6 +64,8 @@ class UserController {
           .json({ success: false, message: 'Avatar enviado não existe' });
       }
     }
+    // by default when a user is created your wishlist is public
+    req.body.public_wishlist = true;
 
     const { id, name, email } = await User.create(req.body);
     return res.json({ id, name, email });

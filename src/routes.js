@@ -124,6 +124,9 @@ routes.delete(
   WishlistController.destroy
 );
 
+routes.post('/public-wishlist/', WishlistController.makePublic);
+routes.post('/private-wishlist/', WishlistController.makePrivate);
+
 routes.post(
   '/follow-user/:follow_user_id',
   ValidateNetworkStore,
