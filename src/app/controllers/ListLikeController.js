@@ -36,7 +36,7 @@ class ListLikeController {
     });
   }
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const { list_id } = req.params;
 
     const validList = await List.findOne({

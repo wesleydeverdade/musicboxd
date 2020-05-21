@@ -9,6 +9,10 @@ class ListController {
     return res.json(req.body);
   }
 
+  async show(req, res) {
+    return res.json(req.body);
+  }
+
   async store(req, res) {
     const {
       name,
@@ -122,7 +126,7 @@ class ListController {
     return res.json(list);
   }
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const { list_id } = req.params;
 
     const list = await List.findOne({

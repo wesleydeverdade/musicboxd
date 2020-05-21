@@ -36,7 +36,7 @@ class ReviewLikeController {
     });
   }
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const { review_id } = req.params;
 
     const validReview = await Review.findOne({

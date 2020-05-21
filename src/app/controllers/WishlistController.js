@@ -47,7 +47,7 @@ class WishlistController {
     });
   }
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const { spotify_id } = req.params;
 
     const album = await Album.findOne({ where: { spotify_id } });

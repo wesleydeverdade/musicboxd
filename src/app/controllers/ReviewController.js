@@ -39,6 +39,10 @@ class ReviewController {
     // return res.json(reviews);
   }
 
+  async show(req, res) {
+    return res.json(req.body);
+  }
+
   async store(req, res) {
     const { spotify_id, content, liked, note, tags } = req.body;
     const albumExists = await Album.findOne({ where: { spotify_id } });
@@ -136,7 +140,7 @@ class ReviewController {
     return res.json({ review });
   }
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const { review_id } = req.params;
 
     const review = await Review.findOne({

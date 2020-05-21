@@ -12,28 +12,33 @@ import ReviewLikeController from './app/controllers/ReviewLikeController';
 import ListLikeController from './app/controllers/ListLikeController';
 import WishlistController from './app/controllers/WishlistController';
 
+import ValidateUserIndex from './app/validators/UserIndex';
+import ValidateUserShow from './app/validators/UserShow';
 import ValidateUserStore from './app/validators/UserStore';
 import ValidateUserUpdate from './app/validators/UserUpdate';
-import ValidateUserDelete from './app/validators/UserDelete';
+import ValidateUserDestroy from './app/validators/UserDestroy';
+
 import ValidateSessionStore from './app/validators/SessionStore';
 
 import ValidateReviewIndex from './app/validators/ReviewIndex';
+import ValidateReviewShow from './app/validators/ReviewShow';
 import ValidateReviewStore from './app/validators/ReviewStore';
 import ValidateReviewUpdate from './app/validators/ReviewUpdate';
-import ValidateReviewDelete from './app/validators/ReviewDelete';
+import ValidateReviewDestroy from './app/validators/ReviewDestroy';
 
 import ValidateListIndex from './app/validators/ListIndex';
+import ValidateListShow from './app/validators/ListShow';
 import ValidateListStore from './app/validators/ListStore';
 import ValidateListUpdate from './app/validators/ListUpdate';
-import ValidateListDelete from './app/validators/ListDelete';
+import ValidateListDestroy from './app/validators/ListDestroy';
 
 import ValidateReviewLikeStore from './app/validators/ReviewLikeStore';
-import ValidateReviewLikeDelete from './app/validators/ReviewLikeDelete';
+import ValidateReviewLikeDestroy from './app/validators/ReviewLikeDestroy';
 import ValidateListLikeStore from './app/validators/ListLikeStore';
-import ValidateListLikeDelete from './app/validators/ListLikeDelete';
+import ValidateListLikeDestroy from './app/validators/ListLikeDestroy';
 
 import ValidateWishlistStore from './app/validators/WishlistStore';
-import ValidateWishlistDelete from './app/validators/WishlistDelete';
+import ValidateWishlistDestroy from './app/validators/WishlistDestroy';
 
 import authMiddleware from './app/middlewares/auth';
 
@@ -46,16 +51,23 @@ routes.get('/find-album', SpotifyFind.search);
 routes.get('/get-album', SpotifyFind.album);
 routes.get('/get-artist', SpotifyFind.artist);
 
+/* ABRE - TEM QUE VER ESSA PORRA AÍ */
+routes.get('/users', ValidateUserIndex, UserController.index);
 routes.get('/reviews', ValidateReviewIndex, ReviewController.index);
+routes.get('/lists', ValidateListIndex, ListController.index);
+// // // // // // // // // // // // // // // // // // // // // // //
+routes.get('/users/:user_id', ValidateUserShow, UserController.show);
+routes.get('/reviews/:review_id', ValidateReviewShow, ReviewController.show);
+routes.get('/lists/:list_id', ValidateListShow, ListController.show);
+/* FECHA - TEM QUE VER ESSA PORRA AÍ */
 
 routes.post('/users', ValidateUserStore, UserController.store);
 routes.post('/session', ValidateSessionStore, SessionController.store);
 
 routes.use(authMiddleware);
 
-routes.get('/users', UserController.index);
 routes.put('/users', ValidateUserUpdate, UserController.update);
-routes.delete('/users', ValidateUserDelete, UserController.delete);
+routes.delete('/users', ValidateUserDestroy, UserController.destroy);
 
 routes.post('/files', upload.single('file'), FileController.store);
 
@@ -67,14 +79,13 @@ routes.put(
 );
 routes.delete(
   '/reviews/:review_id',
-  ValidateReviewDelete,
-  ReviewController.delete
+  ValidateReviewDestroy,
+  ReviewController.destroy
 );
 
-routes.get('/lists', ValidateListIndex, ListController.index);
 routes.post('/lists', ValidateListStore, ListController.store);
 routes.put('/lists/:list_id', ValidateListUpdate, ListController.update);
-routes.delete('/lists/:list_id', ValidateListDelete, ListController.delete);
+routes.delete('/lists/:list_id', ValidateListDestroy, ListController.destroy);
 
 routes.post(
   '/like-review/:review_id',
@@ -83,8 +94,8 @@ routes.post(
 );
 routes.delete(
   '/like-review/:review_id',
-  ValidateReviewLikeDelete,
-  ReviewLikeController.delete
+  ValidateReviewLikeDestroy,
+  ReviewLikeController.destroy
 );
 
 routes.post(
@@ -94,8 +105,8 @@ routes.post(
 );
 routes.delete(
   '/like-list/:list_id',
-  ValidateListLikeDelete,
-  ListLikeController.delete
+  ValidateListLikeDestroy,
+  ListLikeController.destroy
 );
 
 routes.post(
@@ -105,8 +116,8 @@ routes.post(
 );
 routes.delete(
   '/wishlist/:spotify_id',
-  ValidateWishlistDelete,
-  WishlistController.delete
+  ValidateWishlistDestroy,
+  WishlistController.destroy
 );
 
 export default routes;

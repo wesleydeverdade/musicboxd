@@ -4,39 +4,44 @@ import File from '../models/File';
 
 class UserController {
   async index(req, res) {
-    const { page = 1 } = req.query;
+    return res.json(req.body);
+    // const { page = 1 } = req.query;
 
-    const users = await User.findAll({
-      where: {},
-      limit: 20,
-      offset: (page - 1) * 20,
-      attributes: [
-        'id',
-        'username',
-        'email',
-        'first_name',
-        'last_name',
-        'location',
-        'website',
-        'bio',
-        'people_section',
-        'first_favorite_album',
-        'second_favorite_album',
-        'third_favorite_album',
-        'fourth_favorite_album',
-        'fifth_favorite_album',
-        'avatar_id',
-      ],
-      include: [
-        {
-          model: File,
-          as: 'avatar',
-          attributes: ['name', 'path', 'url'],
-        },
-      ],
-    });
+    // const users = await User.findAll({
+    //   where: {},
+    //   limit: 20,
+    //   offset: (page - 1) * 20,
+    //   attributes: [
+    //     'id',
+    //     'username',
+    //     'email',
+    //     'first_name',
+    //     'last_name',
+    //     'location',
+    //     'website',
+    //     'bio',
+    //     'people_section',
+    //     'first_favorite_album',
+    //     'second_favorite_album',
+    //     'third_favorite_album',
+    //     'fourth_favorite_album',
+    //     'fifth_favorite_album',
+    //     'avatar_id',
+    //   ],
+    //   include: [
+    //     {
+    //       model: File,
+    //       as: 'avatar',
+    //       attributes: ['name', 'path', 'url'],
+    //     },
+    //   ],
+    // });
 
-    return res.json(users);
+    // return res.json(users);
+  }
+
+  async show(req, res) {
+    return res.json(req.body);
   }
 
   async store(req, res) {
@@ -126,7 +131,7 @@ class UserController {
     return res.json({ id, name, email, avatar });
   }
 
-  async delete(req, res) {
+  async destroy(req, res) {
     const user = await User.findOne({ where: { id: req.userId } });
 
     if (!user) {
