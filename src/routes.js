@@ -11,6 +11,8 @@ import ReviewLikeController from './app/controllers/ReviewLikeController';
 import ListLikeController from './app/controllers/ListLikeController';
 import WishlistController from './app/controllers/WishlistController';
 import NetworkController from './app/controllers/NetworkController';
+import CommentPolicyReview from './app/controllers/CommentPolicyReview';
+import CommentPolicyList from './app/controllers/CommentPolicyList';
 
 import ValidateUserIndex from './app/validators/UserIndex';
 import ValidateUserShow from './app/validators/UserShow';
@@ -43,6 +45,9 @@ import ValidateWishlistDestroy from './app/validators/WishlistDestroy';
 
 import ValidateNetworkStore from './app/validators/NetworkStore';
 import ValidateNetworkDestroy from './app/validators/NetworkDestroy';
+
+import ValidateCommentPolicyReviewStore from './app/validators/CommentPolicyReviewStore';
+import ValidateCommentPolicyListStore from './app/validators/CommentPolicyListStore';
 
 import SpotifyFind from './app/controllers/SpotifyFind';
 
@@ -136,6 +141,17 @@ routes.delete(
   '/follow-user/:follow_user_id',
   ValidateNetworkDestroy,
   NetworkController.destroy
+);
+
+routes.post(
+  '/change-comment-policy/review',
+  ValidateCommentPolicyReviewStore,
+  CommentPolicyReview.store
+);
+routes.post(
+  '/change-comment-policy/list',
+  ValidateCommentPolicyListStore,
+  CommentPolicyList.store
 );
 
 export default routes;
