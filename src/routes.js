@@ -13,6 +13,8 @@ import WishlistController from './app/controllers/WishlistController';
 import NetworkController from './app/controllers/NetworkController';
 import CommentPolicyReview from './app/controllers/CommentPolicyReview';
 import CommentPolicyList from './app/controllers/CommentPolicyList';
+import CommentReviewController from './app/controllers/CommentReviewController';
+import CommentListController from './app/controllers/CommentListController';
 
 import ValidateUserIndex from './app/validators/UserIndex';
 import ValidateUserShow from './app/validators/UserShow';
@@ -48,6 +50,14 @@ import ValidateNetworkDestroy from './app/validators/NetworkDestroy';
 
 import ValidateCommentPolicyReviewStore from './app/validators/CommentPolicyReviewStore';
 import ValidateCommentPolicyListStore from './app/validators/CommentPolicyListStore';
+
+import ValidateCommentReviewStore from './app/validators/CommentReviewStore';
+import ValidateCommentReviewUpdate from './app/validators/CommentReviewUpdate';
+import ValidateCommentReviewDestroy from './app/validators/CommentReviewDestroy';
+
+import ValidateCommentListStore from './app/validators/CommentListStore';
+import ValidateCommentListUpdate from './app/validators/CommentListUpdate';
+import ValidateCommentListDestroy from './app/validators/CommentListDestroy';
 
 import SpotifyFind from './app/controllers/SpotifyFind';
 
@@ -152,6 +162,38 @@ routes.post(
   '/change-comment-policy/list',
   ValidateCommentPolicyListStore,
   CommentPolicyList.store
+);
+
+routes.post(
+  '/comment-reviews',
+  ValidateCommentReviewStore,
+  CommentReviewController.store
+);
+routes.put(
+  '/comment-reviews/:review_id',
+  ValidateCommentReviewUpdate,
+  CommentReviewController.update
+);
+routes.delete(
+  '/comment-reviews/:review_id',
+  ValidateCommentReviewDestroy,
+  CommentReviewController.destroy
+);
+
+routes.post(
+  '/comment-lists',
+  ValidateCommentListStore,
+  CommentListController.store
+);
+routes.put(
+  '/comment-lists/:list_id',
+  ValidateCommentListUpdate,
+  CommentListController.update
+);
+routes.delete(
+  '/comment-lists/:list_id',
+  ValidateCommentListDestroy,
+  CommentListController.destroy
 );
 
 export default routes;

@@ -37,6 +37,11 @@ class List extends Model {
       through: 'list_albums',
       as: 'albums',
     });
+    this.belongsToMany(models.User, {
+      foreignKey: 'list_id',
+      through: 'list_comments',
+      as: 'list_users',
+    });
   }
 }
 

@@ -8,8 +8,20 @@ import Review from '../app/models/Review';
 import List from '../app/models/List';
 import ListAlbum from '../app/models/ListAlbum';
 import Album from '../app/models/Album';
+import ReviewComment from '../app/models/ReviewComment';
+import ListComment from '../app/models/ListComment';
 
-const models = [User, File, Tag, Review, List, ListAlbum, Album];
+const models = [
+  User,
+  File,
+  Tag,
+  Review,
+  List,
+  ListAlbum,
+  Album,
+  ReviewComment,
+  ListComment,
+];
 
 class Database {
   constructor() {

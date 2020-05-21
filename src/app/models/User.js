@@ -65,6 +65,16 @@ class User extends Model {
       through: 'network',
       as: 'users',
     });
+    this.belongsToMany(models.Review, {
+      foreignKey: 'user_id',
+      through: 'review_comments',
+      as: 'review_users',
+    });
+    this.belongsToMany(models.List, {
+      foreignKey: 'user_id',
+      through: 'list_comments',
+      as: 'lists_users',
+    });
   }
 
   checkPassword(password) {
