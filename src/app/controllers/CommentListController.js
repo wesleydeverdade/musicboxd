@@ -49,7 +49,7 @@ class CommentListController {
       list_id: list.id,
     });
 
-    const comment = await list_comment.addComment(user);
+    const [comment] = await list_comment.addComment(user);
 
     return res.json({ comment });
   }
@@ -80,7 +80,7 @@ class CommentListController {
 
     return res.json({
       comment: {
-        review_comment_id: get_comments.user_list_comments.review_comment_id,
+        list_comment_id: get_comments.user_list_comments.list_comment_id,
         user_id: get_comments.user_list_comments.user_id,
         createdAt: get_comments.user_list_comments.createdAt,
         updatedAt: get_comments.user_list_comments.updatedAt,
