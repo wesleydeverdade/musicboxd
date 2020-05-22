@@ -5,6 +5,8 @@ class ReviewComment extends Model {
     super.init(
       {
         content: Sequelize.TEXT,
+        // 0: comment author, 1: review author
+        deleted_by: Sequelize.NUMBER,
       },
       {
         sequelize,
@@ -21,7 +23,6 @@ class ReviewComment extends Model {
       foreignKey: 'review_id',
       as: 'review_comment',
     });
-
     this.belongsToMany(models.User, {
       foreignKey: 'review_comment_id',
       through: 'user_review_comments',

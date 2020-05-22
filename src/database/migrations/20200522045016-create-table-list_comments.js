@@ -11,6 +11,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      deleted_by: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       list_id: {
         type: Sequelize.INTEGER,
         references: { model: 'lists', key: 'id' },

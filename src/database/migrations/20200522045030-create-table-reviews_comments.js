@@ -11,6 +11,10 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false,
       },
+      deleted_by: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
       review_id: {
         type: Sequelize.INTEGER,
         references: { model: 'reviews', key: 'id' },

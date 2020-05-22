@@ -1,4 +1,3 @@
-import { Op } from 'sequelize';
 import User from '../models/User';
 import Review from '../models/Review';
 import ReviewComment from '../models/ReviewComment';
@@ -89,7 +88,39 @@ class CommentReviewController {
   }
 
   async destroy(req, res) {
-    return res.json(req.body);
+    const { comment_id } = req.params;
+    let deleted_by = 0;
+
+    const comment = await ReviewComment.findByPk(comment_id);
+
+    if (!comment) {
+      return res
+        .status(400)
+        .json({ success: false, message: 'Comentário inválido.' });
+    }
+
+    const user = await User.findByPk(req.userId);
+    const review = await Review.findByPk(comment.review_id);
+    const user_comment = await comment.hasComment(user);
+
+    // only the owner of comment or the owner of review can delete
+    if (!user_comment && review.user_id !== req.userId) {
+      return res.status(400).json({
+        success: false,
+        message: 'Você não pode apagar este comentário.',
+      });
+    }
+
+    if (review.user_id === req.userId) deleted_by = 1;
+
+    if (!(await ReviewComment.destroy({ where: { id: comment_id } })))
+      return res.json({
+        success: false,
+        message:
+          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+      });
+    comment.update({ deleted_by });
+    return res.json({ success: true, message: 'Comentário apagado' });
   }
 }
 
