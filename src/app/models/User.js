@@ -38,7 +38,6 @@ class User extends Model {
   static associate(models) {
     this.hasMany(models.Review, { foreignKey: 'user_id', as: 'user_review' });
     this.hasMany(models.List, { foreignKey: 'user_id', as: 'user_list' });
-
     this.belongsTo(models.File, { foreignKey: 'avatar_id', as: 'avatar' });
     this.belongsToMany(models.List, {
       foreignKey: 'user_id',
@@ -64,6 +63,17 @@ class User extends Model {
       foreignKey: 'follow_user_id',
       through: 'network',
       as: 'users',
+    });
+
+    this.belongsToMany(models.ReviewComment, {
+      foreignKey: 'user_id',
+      through: 'user_review_comments',
+      as: 'review_user_comments',
+    });
+    this.belongsToMany(models.ListComment, {
+      foreignKey: 'user_id',
+      through: 'user_list_comments',
+      as: 'list_user_comments',
     });
   }
 

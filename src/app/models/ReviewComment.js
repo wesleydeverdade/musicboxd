@@ -15,6 +15,19 @@ class ReviewComment extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Review, {
+      foreignKey: 'review_id',
+      as: 'review_comment',
+    });
+
+    this.belongsToMany(models.User, {
+      foreignKey: 'review_comment_id',
+      through: 'user_review_comments',
+      as: 'comments',
+    });
+  }
 }
 
 export default ReviewComment;
