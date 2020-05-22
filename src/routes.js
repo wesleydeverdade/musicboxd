@@ -170,12 +170,12 @@ routes.post(
   CommentReviewController.store
 );
 routes.put(
-  '/comment-reviews/:review_id',
+  '/comment-reviews/:comment_id',
   ValidateCommentReviewUpdate,
   CommentReviewController.update
 );
 routes.delete(
-  '/comment-reviews/:review_id',
+  '/comment-reviews/:comment_id',
   ValidateCommentReviewDestroy,
   CommentReviewController.destroy
 );
@@ -186,12 +186,12 @@ routes.post(
   CommentListController.store
 );
 routes.put(
-  '/comment-lists/:list_id',
+  '/comment-lists/:comment_id',
   ValidateCommentListUpdate,
   CommentListController.update
 );
 routes.delete(
-  '/comment-lists/:list_id',
+  '/comment-lists/:comment_id',
   ValidateCommentListDestroy,
   CommentListController.destroy
 );

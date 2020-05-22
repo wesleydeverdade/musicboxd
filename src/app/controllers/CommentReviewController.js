@@ -1,8 +1,3 @@
-import { Op } from 'sequelize';
-import List from '../models/List';
-import Review from '../models/Review';
-import ReviewComment from '../models/ReviewComment';
-
 class CommentReviewController {
   async index(req, res) {
     return res.json(req.body);

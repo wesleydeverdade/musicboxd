@@ -1,8 +1,3 @@
-import { Op } from 'sequelize';
-import List from '../models/List';
-import Album from '../models/Album';
-import ListComment from '../models/ListComment';
-
 class CommentListController {
   async index(req, res) {
     return res.json(req.body);

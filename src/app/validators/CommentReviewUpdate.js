@@ -9,7 +9,7 @@ export default async (req, res, next) => {
     await schema.validate(req.body, { abortEarly: false });
 
     const params = Yup.object().shape({
-      review_id: Yup.number().required(),
+      comment_id: Yup.number().required(),
     });
 
     await params.validate(req.params, { abortEarly: false });
