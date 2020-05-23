@@ -28,6 +28,11 @@ class ListComment extends Model {
       through: 'user_list_comments',
       as: 'comments',
     });
+    this.belongsToMany(models.User, {
+      foreignKey: 'list_comment_id',
+      through: 'list_comment_likes',
+      as: 'likes',
+    });
   }
 }
 

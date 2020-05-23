@@ -4,6 +4,7 @@ docker run --name mysqlmusicbox -e MYSQL_ROOT_PASSWORD=docker -d mysql
 
 docker start pgmusicbox
 docker start mongomusicbox
+docker start mysqlmusicbox
 
 docker container ps -a
 

@@ -28,6 +28,11 @@ class ReviewComment extends Model {
       through: 'user_review_comments',
       as: 'comments',
     });
+    this.belongsToMany(models.User, {
+      foreignKey: 'review_comment_id',
+      through: 'review_comment_likes',
+      as: 'likes',
+    });
   }
 }
 

@@ -75,6 +75,16 @@ class User extends Model {
       through: 'user_list_comments',
       as: 'list_user_comments',
     });
+    this.belongsToMany(models.ReviewComment, {
+      foreignKey: 'user_id',
+      through: 'review_comment_likes',
+      as: 'user_review_comment_likes',
+    });
+    this.belongsToMany(models.ListComment, {
+      foreignKey: 'user_id',
+      through: 'list_comment_likes',
+      as: 'user_list_comment_likes',
+    });
   }
 
   checkPassword(password) {

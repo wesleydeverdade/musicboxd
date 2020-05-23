@@ -15,6 +15,8 @@ import CommentPolicyReview from './app/controllers/CommentPolicyReview';
 import CommentPolicyList from './app/controllers/CommentPolicyList';
 import CommentReviewController from './app/controllers/CommentReviewController';
 import CommentListController from './app/controllers/CommentListController';
+import ReviewCommentLikeController from './app/controllers/ReviewCommentLikeController';
+import ListCommentLikeController from './app/controllers/ListCommentLikeController';
 
 import ValidateUserIndex from './app/validators/UserIndex';
 import ValidateUserShow from './app/validators/UserShow';
@@ -58,6 +60,12 @@ import ValidateCommentReviewDestroy from './app/validators/CommentReviewDestroy'
 import ValidateCommentListStore from './app/validators/CommentListStore';
 import ValidateCommentListUpdate from './app/validators/CommentListUpdate';
 import ValidateCommentListDestroy from './app/validators/CommentListDestroy';
+
+import ValidateReviewCommentLikeStore from './app/validators/ReviewCommentLikeStore';
+import ValidateReviewCommentLikeDestroy from './app/validators/ReviewCommentLikeDestroy';
+
+import ValidateListCommentLikeStore from './app/validators/ListCommentLikeStore';
+import ValidateListCommentLikeDestroy from './app/validators/ListCommentLikeDestroy';
 
 import SpotifyFind from './app/controllers/SpotifyFind';
 
@@ -194,6 +202,28 @@ routes.delete(
   '/comment-lists/:comment_id',
   ValidateCommentListDestroy,
   CommentListController.destroy
+);
+
+routes.post(
+  '/like-review-comment/:comment_id',
+  ValidateReviewCommentLikeStore,
+  ReviewCommentLikeController.store
+);
+routes.delete(
+  '/like-review-comment/:comment_id',
+  ValidateReviewCommentLikeDestroy,
+  ReviewCommentLikeController.destroy
+);
+
+routes.post(
+  '/like-list-comment/:comment_id',
+  ValidateListCommentLikeStore,
+  ListCommentLikeController.store
+);
+routes.delete(
+  '/like-list-comment/:comment_id',
+  ValidateListCommentLikeDestroy,
+  ListCommentLikeController.destroy
 );
 
 export default routes;
