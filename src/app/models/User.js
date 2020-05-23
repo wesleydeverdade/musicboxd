@@ -96,6 +96,42 @@ class User extends Model {
       through: 'user_blocks',
       as: 'users_blockeds',
     });
+
+    this.belongsToMany(models.User, {
+      foreignKey: 'user_id',
+      through: 'report_users',
+      as: 'reports',
+    });
+    this.belongsToMany(models.User, {
+      foreignKey: 'reported_user_id',
+      through: 'report_users',
+      as: 'user_report_users',
+    });
+    this.belongsToMany(models.Album, {
+      foreignKey: 'user_id',
+      through: 'report_albums',
+      as: 'user_report_realbums',
+    });
+    this.belongsToMany(models.Review, {
+      foreignKey: 'user_id',
+      through: 'report_reviews',
+      as: 'user_report_reviews',
+    });
+    this.belongsToMany(models.List, {
+      foreignKey: 'user_id',
+      through: 'report_lists',
+      as: 'user_report_lists',
+    });
+    this.belongsToMany(models.ReviewComment, {
+      foreignKey: 'user_id',
+      through: 'report_comment_reviews',
+      as: 'user_report_comment_reviews',
+    });
+    this.belongsToMany(models.ListComment, {
+      foreignKey: 'user_id',
+      through: 'report_comment_lists',
+      as: 'user_report_comment_lists',
+    });
   }
 
   checkPassword(password) {

@@ -41,6 +41,12 @@ class List extends Model {
       foreignKey: 'list_id',
       as: 'list_comment',
     });
+
+    this.belongsToMany(models.User, {
+      foreignKey: 'reported_list_id',
+      through: 'report_lists',
+      as: 'reports',
+    });
   }
 }
 

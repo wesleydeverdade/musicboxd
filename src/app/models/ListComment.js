@@ -6,7 +6,7 @@ class ListComment extends Model {
       {
         content: Sequelize.TEXT,
         // 0: comment author, 1: review author
-        deleted_by: Sequelize.NUMBER,
+        deleted_by: Sequelize.INTEGER,
       },
       {
         sequelize,
@@ -32,6 +32,12 @@ class ListComment extends Model {
       foreignKey: 'list_comment_id',
       through: 'list_comment_likes',
       as: 'likes',
+    });
+
+    this.belongsToMany(models.User, {
+      foreignKey: 'reported_list_comment_id',
+      through: 'report_comment_lists',
+      as: 'reports',
     });
   }
 }

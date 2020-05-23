@@ -18,6 +18,12 @@ import CommentListController from './app/controllers/CommentListController';
 import ReviewCommentLikeController from './app/controllers/ReviewCommentLikeController';
 import ListCommentLikeController from './app/controllers/ListCommentLikeController';
 import UserBlockController from './app/controllers/UserBlockController';
+import ReportUserController from './app/controllers/ReportUserController';
+import ReportAlbumController from './app/controllers/ReportAlbumController';
+import ReportReviewController from './app/controllers/ReportReviewController';
+import ReportListController from './app/controllers/ReportListController';
+import ReportCommentReviewController from './app/controllers/ReportCommentReviewController';
+import ReportCommentListController from './app/controllers/ReportCommentListController';
 
 import ValidateUserIndex from './app/validators/UserIndex';
 import ValidateUserShow from './app/validators/UserShow';
@@ -70,6 +76,13 @@ import ValidateListCommentLikeDestroy from './app/validators/ListCommentLikeDest
 
 import ValidateUserBlockStore from './app/validators/UserBlockStore';
 import ValidateUserBlockDestroy from './app/validators/UserBlockDestroy';
+
+import ValidateReportUser from './app/validators/ReportUser';
+import ValidateReportAlbum from './app/validators/ReportAlbum';
+import ValidateReportReview from './app/validators/ReportReview';
+import ValidateReportList from './app/validators/ReportList';
+import ValidateReportCommentReview from './app/validators/ReportCommentReview';
+import ValidateReportCommentList from './app/validators/ReportCommentList';
 
 import SpotifyFind from './app/controllers/SpotifyFind';
 
@@ -239,6 +252,37 @@ routes.delete(
   '/block-user/:block_user_id',
   ValidateUserBlockDestroy,
   UserBlockController.destroy
+);
+
+routes.post(
+  '/report-user/:report_user_id',
+  ValidateReportUser,
+  ReportUserController.store
+);
+routes.post(
+  '/report-album/:report_album_id',
+  ValidateReportAlbum,
+  ReportAlbumController.store
+);
+routes.post(
+  '/report-review/:report_review_id',
+  ValidateReportReview,
+  ReportReviewController.store
+);
+routes.post(
+  '/report-list/:report_list_id',
+  ValidateReportList,
+  ReportListController.store
+);
+routes.post(
+  '/report-comment-review/:report_comment_review_id',
+  ValidateReportCommentReview,
+  ReportCommentReviewController.store
+);
+routes.post(
+  '/report-comment-list/:report_comment_list_id',
+  ValidateReportCommentList,
+  ReportCommentListController.store
 );
 
 export default routes;

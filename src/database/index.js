@@ -11,6 +11,13 @@ import Album from '../app/models/Album';
 import ReviewComment from '../app/models/ReviewComment';
 import ListComment from '../app/models/ListComment';
 
+import ReportUser from '../app/models/ReportUser';
+import ReportAlbum from '../app/models/ReportAlbum';
+import ReportList from '../app/models/ReportList';
+import ReportReview from '../app/models/ReportReview';
+import ReportCommentList from '../app/models/ReportCommentList';
+import ReportCommentReview from '../app/models/ReportCommentReview';
+
 const models = [
   User,
   File,
@@ -21,6 +28,12 @@ const models = [
   Album,
   ReviewComment,
   ListComment,
+  ReportUser,
+  ReportAlbum,
+  ReportList,
+  ReportReview,
+  ReportCommentList,
+  ReportCommentReview,
 ];
 
 class Database {

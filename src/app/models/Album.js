@@ -32,6 +32,12 @@ class Album extends Model {
       through: 'wishlists',
       as: 'users',
     });
+
+    this.belongsToMany(models.User, {
+      foreignKey: 'reported_album_id',
+      through: 'report_albums',
+      as: 'reports',
+    });
   }
 }
 

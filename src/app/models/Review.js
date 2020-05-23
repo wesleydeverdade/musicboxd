@@ -39,6 +39,12 @@ class Review extends Model {
       foreignKey: 'review_id',
       as: 'review_comment',
     });
+
+    this.belongsToMany(models.User, {
+      foreignKey: 'reported_review_id',
+      through: 'report_reviews',
+      as: 'reports',
+    });
   }
 }
 
