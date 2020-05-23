@@ -17,6 +17,7 @@ import CommentReviewController from './app/controllers/CommentReviewController';
 import CommentListController from './app/controllers/CommentListController';
 import ReviewCommentLikeController from './app/controllers/ReviewCommentLikeController';
 import ListCommentLikeController from './app/controllers/ListCommentLikeController';
+import UserBlockController from './app/controllers/UserBlockController';
 
 import ValidateUserIndex from './app/validators/UserIndex';
 import ValidateUserShow from './app/validators/UserShow';
@@ -66,6 +67,9 @@ import ValidateReviewCommentLikeDestroy from './app/validators/ReviewCommentLike
 
 import ValidateListCommentLikeStore from './app/validators/ListCommentLikeStore';
 import ValidateListCommentLikeDestroy from './app/validators/ListCommentLikeDestroy';
+
+import ValidateUserBlockStore from './app/validators/UserBlockStore';
+import ValidateUserBlockDestroy from './app/validators/UserBlockDestroy';
 
 import SpotifyFind from './app/controllers/SpotifyFind';
 
@@ -224,6 +228,17 @@ routes.delete(
   '/like-list-comment/:comment_id',
   ValidateListCommentLikeDestroy,
   ListCommentLikeController.destroy
+);
+
+routes.post(
+  '/block-user/:block_user_id',
+  ValidateUserBlockStore,
+  UserBlockController.store
+);
+routes.delete(
+  '/block-user/:block_user_id',
+  ValidateUserBlockDestroy,
+  UserBlockController.destroy
 );
 
 export default routes;

@@ -85,6 +85,17 @@ class User extends Model {
       through: 'list_comment_likes',
       as: 'user_list_comment_likes',
     });
+
+    this.belongsToMany(models.User, {
+      foreignKey: 'user_id',
+      through: 'user_blocks',
+      as: 'blocks',
+    });
+    this.belongsToMany(models.User, {
+      foreignKey: 'blocked_user_id',
+      through: 'user_blocks',
+      as: 'users_blockeds',
+    });
   }
 
   checkPassword(password) {

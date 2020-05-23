@@ -1,28 +1,28 @@
 import User from '../models/User';
 
-class NetworkController {
+class UserBlockController {
   async store(req, res) {
-    const follow_user_id = parseInt(req.params.follow_user_id, 10);
+    const block_user_id = parseInt(req.params.block_user_id, 10);
 
-    if (follow_user_id === req.userId) {
+    if (block_user_id === req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode seguir a si mesmo!',
+        message: 'Você não pode bloquear a si mesmo!',
       });
     }
 
-    const validUser = await User.findByPk(follow_user_id);
+    const validUser = await User.findByPk(block_user_id);
 
     if (!validUser) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode seguir este usuário!',
+        message: 'Você não pode bloquear este usuário!',
       });
     }
 
     const user = await User.findByPk(req.userId);
 
-    if (!(await user.addFollower(validUser)))
+    if (!(await user.addBlock(validUser)))
       return res.json({
         success: false,
         message:
@@ -31,32 +31,32 @@ class NetworkController {
 
     return res.json({
       success: true,
-      message: 'Usuário seguido com sucesso',
+      message: 'Usuário bloqueado com sucesso',
     });
   }
 
   async destroy(req, res) {
-    const follow_user_id = parseInt(req.params.follow_user_id, 10);
+    const block_user_id = parseInt(req.params.block_user_id, 10);
 
-    if (follow_user_id === req.userId) {
+    if (block_user_id === req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode desseguir a si mesmo!',
+        message: 'Você não pode desbloquear a si mesmo!',
       });
     }
 
-    const validUser = await User.findByPk(follow_user_id);
+    const validUser = await User.findByPk(block_user_id);
 
     if (!validUser) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode seguir este usuário!',
+        message: 'Você não pode desbloquear este usuário!',
       });
     }
 
     const user = await User.findByPk(req.userId);
 
-    if (!(await user.removeFollower(validUser)))
+    if (!(await user.removeBlock(validUser)))
       return res.json({
         success: false,
         message:
@@ -65,9 +65,9 @@ class NetworkController {
 
     return res.json({
       success: true,
-      message: 'Usuário desseguido com sucesso',
+      message: 'Usuário desbloqueado com sucesso',
     });
   }
 }
 
-export default new NetworkController();
+export default new UserBlockController();

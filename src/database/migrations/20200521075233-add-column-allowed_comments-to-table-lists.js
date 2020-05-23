@@ -3,6 +3,7 @@ module.exports = {
     return queryInterface.addColumn('lists', 'allowed_replies', {
       type: Sequelize.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     });
   },
 
