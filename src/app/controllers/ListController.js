@@ -45,11 +45,13 @@ class ListController {
         where: { spotify_id },
       });
 
-      const [result_add_album] = await list.addAlbum(album);
-      const list_album = await ListAlbum.findOne({
-        where: { id: result_add_album.id },
-      });
-      await list_album.update({ album_order, note });
+      if (album) {
+        const [result_add_album] = await list.addAlbum(album);
+        const list_album = await ListAlbum.findOne({
+          where: { id: result_add_album.id },
+        });
+        await list_album.update({ album_order, note });
+      }
     });
     // insert albums on return instead a new query only to take the relationship
     list.dataValues.albums = albums;
@@ -101,11 +103,13 @@ class ListController {
         where: { spotify_id },
       });
 
-      const [result_add_album] = await list.addAlbum(album);
-      const list_album = await ListAlbum.findOne({
-        where: { id: result_add_album.id },
-      });
-      await list_album.update({ album_order, note });
+      if (album) {
+        const [result_add_album] = await list.addAlbum(album);
+        const list_album = await ListAlbum.findOne({
+          where: { id: result_add_album.id },
+        });
+        await list_album.update({ album_order, note });
+      }
     });
     // insert albums on return instead a new query only to take the relationship
     list.dataValues.albums = albums;
