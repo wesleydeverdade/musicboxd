@@ -17,7 +17,7 @@ class ReportReviewController {
     }
 
     const reportExists = await ReportReview.findOne({
-      where: { user_id: req.userId, reported_review_id: report_review_id },
+      where: { user_id: req.userId, report_review_id },
     });
 
     if (!reportExists) {

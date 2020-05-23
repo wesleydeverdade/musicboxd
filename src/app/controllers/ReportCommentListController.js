@@ -4,10 +4,10 @@ import ReportCommentList from '../models/ReportCommentList';
 
 class ReportCommentListController {
   async store(req, res) {
-    const { report_comment_list_id } = req.params;
+    const { report_list_comment_id } = req.params;
     const { reason, content } = req.body;
 
-    const list_comment = await ListComment.findByPk(report_comment_list_id);
+    const list_comment = await ListComment.findByPk(report_list_comment_id);
 
     if (!list_comment) {
       return res.status(400).json({
@@ -19,7 +19,7 @@ class ReportCommentListController {
     const reportCommentExists = await ReportCommentList.findOne({
       where: {
         user_id: req.userId,
-        reported_list_comment_id: report_comment_list_id,
+        report_list_comment_id,
       },
     });
 

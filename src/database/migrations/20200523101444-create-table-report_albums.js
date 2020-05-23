@@ -23,7 +23,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      reported_album_id: {
+      report_album_id: {
         type: Sequelize.INTEGER,
         references: { model: 'albums', key: 'id' },
         onUpdate: 'CASCADE',

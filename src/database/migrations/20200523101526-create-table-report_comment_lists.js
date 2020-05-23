@@ -23,7 +23,7 @@ module.exports = {
         onDelete: 'CASCADE',
         allowNull: false,
       },
-      reported_list_comment_id: {
+      report_list_comment_id: {
         type: Sequelize.INTEGER,
         references: { model: 'list_comments', key: 'id' },
         onUpdate: 'CASCADE',

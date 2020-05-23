@@ -34,7 +34,7 @@ class ReviewComment extends Model {
       as: 'likes',
     });
     this.belongsToMany(models.User, {
-      foreignKey: 'reported_review_comment_id',
+      foreignKey: 'report_review_comment_id',
       through: 'report_comment_reviews',
       as: 'reports',
     });

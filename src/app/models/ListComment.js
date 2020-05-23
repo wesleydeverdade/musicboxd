@@ -35,7 +35,7 @@ class ListComment extends Model {
     });
 
     this.belongsToMany(models.User, {
-      foreignKey: 'reported_list_comment_id',
+      foreignKey: 'report_list_comment_id',
       through: 'report_comment_lists',
       as: 'reports',
     });

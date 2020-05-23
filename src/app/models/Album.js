@@ -34,7 +34,7 @@ class Album extends Model {
     });
 
     this.belongsToMany(models.User, {
-      foreignKey: 'reported_album_id',
+      foreignKey: 'report_album_id',
       through: 'report_albums',
       as: 'reports',
     });

@@ -17,7 +17,7 @@ class ReportAlbumController {
     }
 
     const reportExists = await ReportAlbum.findOne({
-      where: { user_id: req.userId, reported_album_id: report_album_id },
+      where: { user_id: req.userId, report_album_id },
     });
 
     if (!reportExists) {

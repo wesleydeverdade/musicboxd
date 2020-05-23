@@ -41,7 +41,7 @@ class Review extends Model {
     });
 
     this.belongsToMany(models.User, {
-      foreignKey: 'reported_review_id',
+      foreignKey: 'report_review_id',
       through: 'report_reviews',
       as: 'reports',
     });

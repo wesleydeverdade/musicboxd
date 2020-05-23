@@ -103,7 +103,7 @@ class User extends Model {
       as: 'reports',
     });
     this.belongsToMany(models.User, {
-      foreignKey: 'reported_user_id',
+      foreignKey: 'report_user_id',
       through: 'report_users',
       as: 'user_report_users',
     });

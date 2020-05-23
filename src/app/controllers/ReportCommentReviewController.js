@@ -4,11 +4,11 @@ import ReportCommentReview from '../models/ReportCommentReview';
 
 class ReportCommentReviewController {
   async store(req, res) {
-    const { report_comment_review_id } = req.params;
+    const { report_review_comment_id } = req.params;
     const { reason, content } = req.body;
 
     const review_comment = await ReviewComment.findByPk(
-      report_comment_review_id
+      report_review_comment_id
     );
 
     if (!review_comment) {
@@ -21,7 +21,7 @@ class ReportCommentReviewController {
     const reportCommentExists = await ReportCommentReview.findOne({
       where: {
         user_id: req.userId,
-        reported_review_comment_id: report_comment_review_id,
+        report_review_comment_id,
       },
     });
 

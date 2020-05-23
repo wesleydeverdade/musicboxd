@@ -43,7 +43,7 @@ class List extends Model {
     });
 
     this.belongsToMany(models.User, {
-      foreignKey: 'reported_list_id',
+      foreignKey: 'report_list_id',
       through: 'report_lists',
       as: 'reports',
     });

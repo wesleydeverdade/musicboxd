@@ -77,12 +77,12 @@ import ValidateListCommentLikeDestroy from './app/validators/ListCommentLikeDest
 import ValidateUserBlockStore from './app/validators/UserBlockStore';
 import ValidateUserBlockDestroy from './app/validators/UserBlockDestroy';
 
-import ValidateReportUser from './app/validators/ReportUser';
-import ValidateReportAlbum from './app/validators/ReportAlbum';
-import ValidateReportReview from './app/validators/ReportReview';
-import ValidateReportList from './app/validators/ReportList';
-import ValidateReportCommentReview from './app/validators/ReportCommentReview';
-import ValidateReportCommentList from './app/validators/ReportCommentList';
+import ValidateReportUserStore from './app/validators/ReportUserStore';
+import ValidateReportAlbumStore from './app/validators/ReportAlbumStore';
+import ValidateReportReviewStore from './app/validators/ReportReviewStore';
+import ValidateReportListStore from './app/validators/ReportListStore';
+import ValidateReportCommentReviewStore from './app/validators/ReportCommentReviewStore';
+import ValidateReportCommentListStore from './app/validators/ReportCommentListStore';
 
 import SpotifyFind from './app/controllers/SpotifyFind';
 
@@ -256,32 +256,32 @@ routes.delete(
 
 routes.post(
   '/report-user/:report_user_id',
-  ValidateReportUser,
+  ValidateReportUserStore,
   ReportUserController.store
 );
 routes.post(
   '/report-album/:report_album_id',
-  ValidateReportAlbum,
+  ValidateReportAlbumStore,
   ReportAlbumController.store
 );
 routes.post(
   '/report-review/:report_review_id',
-  ValidateReportReview,
+  ValidateReportReviewStore,
   ReportReviewController.store
 );
 routes.post(
   '/report-list/:report_list_id',
-  ValidateReportList,
+  ValidateReportListStore,
   ReportListController.store
 );
 routes.post(
-  '/report-comment-review/:report_comment_review_id',
-  ValidateReportCommentReview,
+  '/report-comment-review/:report_review_comment_id',
+  ValidateReportCommentReviewStore,
   ReportCommentReviewController.store
 );
 routes.post(
-  '/report-comment-list/:report_comment_list_id',
-  ValidateReportCommentList,
+  '/report-comment-list/:report_list_comment_id',
+  ValidateReportCommentListStore,
   ReportCommentListController.store
 );
 
