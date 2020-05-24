@@ -34,10 +34,11 @@ class Queue {
   }
 
   handleFailure(job, err) {
-    Sentry.init(sentryConfig);
-    Sentry.captureException(err);
-    // eslint-disable-next-line no-console
     // console.log(`Queue ${job.queue.name}: FAILED`, err);
+    if (process.env.NODE_ENV === 'production') {
+      Sentry.init(sentryConfig);
+      Sentry.captureException(err);
+    }
   }
 }
 
