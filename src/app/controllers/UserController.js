@@ -3,6 +3,8 @@ import { Op } from 'sequelize';
 import User from '../models/User';
 import File from '../models/File';
 import authConfig from '../../config/auth';
+// import UserStoreMail from '../jobs/UserStoreMail';
+// import Queue from '../../lib/Queue';
 
 class UserController {
   async index(req, res) {
@@ -67,8 +69,14 @@ class UserController {
       }
     }
 
-    const { id, name, email } = await User.create(req.body);
-    return res.json({ id, name, email });
+    const { id, username, email } = await User.create(req.body);
+
+    // Queue.add(UserStoreMail.key, {
+    //   username,
+    //   email,
+    // });
+
+    return res.json({ id, username, email });
   }
 
   async update(req, res) {

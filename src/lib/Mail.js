@@ -34,17 +34,6 @@ class Mail {
     );
   }
 
-  /*
-    await Mail.sendMail({
-      to: `${first_name} ${last_name} <${email}>`,
-      subject: 'Welcome to Musicbox',
-      template: 'userStore',
-      context: {
-        first_name,
-        last_name,
-      },
-    });
-  */
   sendMail(message) {
     return this.transporter.sendMail({
       ...mailConfig.default,
