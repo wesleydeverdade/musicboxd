@@ -10,7 +10,7 @@ class ListCommentLikeController {
     if (!comment) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode dar like neste comentário!',
+        message: "You can't like this comment",
       });
     }
 
@@ -20,12 +20,12 @@ class ListCommentLikeController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Comentário recebeu seu Like com sucesso',
+      message: 'Comment received your Like successfully',
     });
   }
 
@@ -37,7 +37,7 @@ class ListCommentLikeController {
     if (!comment) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode dar like neste comentário!',
+        message: "You can't like this comment",
       });
     }
 
@@ -47,12 +47,12 @@ class ListCommentLikeController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Comentário teve seu Like removido com sucesso',
+      message: 'Comment had your Like removed successfully',
     });
   }
 }

@@ -12,9 +12,10 @@ class CommentPolicyReview {
     });
 
     if (!review) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Review não pertence ao usuário.' });
+      return res.status(400).json({
+        success: false,
+        message: 'Review does not belong to the user',
+      });
     }
 
     await review.update({ allowed_replies });

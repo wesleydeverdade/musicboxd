@@ -27,20 +27,20 @@ class Spotify {
       const response = await axios.post(endpoint, qs.stringify(data), headers);
       return { success: true, message: response.data.access_token };
     } catch (error) {
-      return { success: false, message: 'Falha ao autenticar-se' };
+      return { success: false, message: 'Failed to authenticate' };
     }
   }
 
   async search({ album }) {
     if (!album) {
-      throw new Error('Parâmetro album não foi enviado');
+      throw new Error('Album parameter was not sent');
     }
 
     const auth = await this.auth();
     let key = '';
 
     if (!auth.success) {
-      throw new Error('Erro na autenticação');
+      throw new Error('Authentication error');
     } else {
       key = auth.message;
     }
@@ -64,20 +64,20 @@ class Spotify {
       const response = await axios.get(endpoint + qs.stringify(data), headers);
       return response.data;
     } catch (err) {
-      throw new Error('Erro ao requisitar álbum');
+      throw new Error('Error requesting album');
     }
   }
 
   async album({ id }) {
     if (!id) {
-      throw new Error('Parâmetro id/album não foi enviado');
+      throw new Error('Id/album parameter not sent');
     }
 
     const auth = await this.auth();
     let key = '';
 
     if (!auth.success) {
-      throw new Error('Erro na autenticação');
+      throw new Error('Authentication error');
     } else {
       key = auth.message;
     }
@@ -96,20 +96,20 @@ class Spotify {
       const response = await axios.get(endpoint, headers);
       return response.data;
     } catch (err) {
-      throw new Error('Erro trazer informações do álbum');
+      throw new Error('Error bringing album info');
     }
   }
 
   async artist({ id }) {
     if (!id) {
-      throw new Error('Parâmetro id/artista não foi enviado');
+      throw new Error('Id/artist parameter was not sent');
     }
 
     const auth = await this.auth();
     let key = '';
 
     if (!auth.success) {
-      throw new Error('Erro na autenticação');
+      throw new Error('Authentication error');
     } else {
       key = auth.message;
     }
@@ -128,7 +128,7 @@ class Spotify {
       const response = await axios.get(endpoint, headers);
       return response.data;
     } catch (err) {
-      throw new Error('Erro trazer informações do artista');
+      throw new Error('Error bringing artist information');
     }
   }
 }

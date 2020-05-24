@@ -14,7 +14,7 @@ class CommentPolicyList {
     if (!list) {
       return res
         .status(400)
-        .json({ success: false, message: 'Lista não pertence ao usuário.' });
+        .json({ success: false, message: 'List does not belong to the user' });
     }
 
     await list.update({ allowed_replies });

@@ -7,7 +7,7 @@ class UserBlockController {
     if (block_user_id === req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode bloquear a si mesmo!',
+        message: 'You cannot block yourself',
       });
     }
 
@@ -16,7 +16,7 @@ class UserBlockController {
     if (!validUser) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode bloquear este usuário!',
+        message: 'You cannot block this user',
       });
     }
 
@@ -26,12 +26,12 @@ class UserBlockController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Usuário bloqueado com sucesso',
+      message: 'User successfully blocked',
     });
   }
 
@@ -41,7 +41,7 @@ class UserBlockController {
     if (block_user_id === req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode desbloquear a si mesmo!',
+        message: 'You cannot unlock yourself',
       });
     }
 
@@ -50,7 +50,7 @@ class UserBlockController {
     if (!validUser) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode desbloquear este usuário!',
+        message: 'You cannot unlock this user',
       });
     }
 
@@ -60,12 +60,12 @@ class UserBlockController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Usuário desbloqueado com sucesso',
+      message: 'User successfully unlocked',
     });
   }
 }

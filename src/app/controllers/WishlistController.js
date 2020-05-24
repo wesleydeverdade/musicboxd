@@ -17,7 +17,7 @@ class WishlistController {
       } catch (err) {
         return res.status(400).json({
           success: false,
-          message: 'Falha de validação (spotify)',
+          message: 'Validation failure (spotify)',
         });
       }
 
@@ -38,12 +38,12 @@ class WishlistController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Album adicionado a sua wishlist com sucesso',
+      message: 'Album successfully added to your wishlist',
     });
   }
 
@@ -56,19 +56,19 @@ class WishlistController {
     if (!album)
       return res.json({
         success: false,
-        message: 'Álbum não encontrado! Tente novamente mais tarde!',
+        message: 'Album not found! Try again later',
       });
 
     if (!(await album.removeUser(user)))
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Álbum removido da sua wishlist com sucesso',
+      message: 'Album successfully removed from your wishlist',
     });
   }
 
@@ -81,12 +81,12 @@ class WishlistController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Wishlist foi alterada para pública.',
+      message: 'Wishlist has been changed to public',
     });
   }
 
@@ -99,12 +99,12 @@ class WishlistController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Wishlist foi alterada para privada.',
+      message: 'Wishlist has been changed to private',
     });
   }
 }

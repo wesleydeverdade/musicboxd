@@ -19,7 +19,7 @@ class CommentReviewController {
     if (!review) {
       return res
         .status(400)
-        .json({ success: false, message: 'Review inválido.' });
+        .json({ success: false, message: 'Invalid review' });
     }
 
     const user = await User.findByPk(req.userId);
@@ -32,13 +32,13 @@ class CommentReviewController {
         if (!(await user_review.hasFollower(user))) {
           return res.json({
             success: false,
-            message: 'Apenas quem o dono do review segue pode comentar.',
+            message: 'Only those who follow the review can comment',
           });
         }
       } else if (review.allowed_replies === 2) {
         return res.json({
           success: false,
-          message: 'Apenas o dono do review pode comentar.',
+          message: 'Only the owner of the review can comment',
         });
       }
     }
@@ -61,7 +61,7 @@ class CommentReviewController {
     if (!comment) {
       return res
         .status(400)
-        .json({ success: false, message: 'Comentário inválido.' });
+        .json({ success: false, message: 'Invalid comment' });
     }
 
     const user = await User.findByPk(req.userId);
@@ -69,7 +69,7 @@ class CommentReviewController {
     if (!(await comment.hasComment(user))) {
       return res.status(400).json({
         success: false,
-        message: 'Comentário não pertence ao usuário.',
+        message: 'Comment does not belong to the user',
       });
     }
 
@@ -96,7 +96,7 @@ class CommentReviewController {
     if (!comment) {
       return res
         .status(400)
-        .json({ success: false, message: 'Comentário inválido.' });
+        .json({ success: false, message: 'Invalid comment' });
     }
 
     const user = await User.findByPk(req.userId);
@@ -107,7 +107,7 @@ class CommentReviewController {
     if (!user_comment && review.user_id !== req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode apagar este comentário.',
+        message: 'You cannot delete this comment',
       });
     }
 
@@ -117,10 +117,10 @@ class CommentReviewController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
     comment.update({ deleted_by });
-    return res.json({ success: true, message: 'Comentário apagado' });
+    return res.json({ success: true, message: 'Comment deleted' });
   }
 }
 

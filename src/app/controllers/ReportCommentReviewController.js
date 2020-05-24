@@ -14,7 +14,7 @@ class ReportCommentReviewController {
     if (!review_comment) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode reportar este comentário!',
+        message: 'You cannot report this comment',
       });
     }
 
@@ -36,7 +36,7 @@ class ReportCommentReviewController {
 
     return res.json({
       success: true,
-      message: 'Comentário reportado com sucesso',
+      message: 'Comment successfully reported',
     });
   }
 }

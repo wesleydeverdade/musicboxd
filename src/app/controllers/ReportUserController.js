@@ -11,7 +11,7 @@ class ReportUserController {
     if (!reported) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode reportar este usuário!',
+        message: 'You cannot report this user',
       });
     }
 
@@ -30,7 +30,7 @@ class ReportUserController {
 
     return res.json({
       success: true,
-      message: 'Usuário reportado com sucesso',
+      message: 'User successfully reported',
     });
   }
 }

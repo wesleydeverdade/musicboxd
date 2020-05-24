@@ -57,7 +57,7 @@ class ReviewController {
       } catch (err) {
         return res.status(400).json({
           success: false,
-          message: 'Falha de validação (spotify)',
+          message: 'Validation failure (spotify)',
         });
       }
 
@@ -81,7 +81,7 @@ class ReviewController {
     if (reviewExists) {
       return res
         .status(400)
-        .json({ success: false, message: 'Review já realizado.' });
+        .json({ success: false, message: 'Review already carried out' });
     }
 
     const review = await Review.create({
@@ -117,9 +117,10 @@ class ReviewController {
     });
 
     if (!review) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Review não pertence ao usuário.' });
+      return res.status(400).json({
+        success: false,
+        message: 'Review does not belong to the user',
+      });
     }
 
     await review.update({ content, liked, note });
@@ -153,16 +154,16 @@ class ReviewController {
     if (!review) {
       return res
         .status(401)
-        .json({ success: false, message: 'Review não encontrado' });
+        .json({ success: false, message: 'Review not found' });
     }
 
     if (!(await Review.destroy({ where: { id: review_id } })))
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
-    return res.json({ success: true, message: 'Review apagado' });
+    return res.json({ success: true, message: 'Review deleted' });
   }
 }
 

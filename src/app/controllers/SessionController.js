@@ -21,13 +21,13 @@ class SessionController {
     if (!user) {
       return res
         .status(401)
-        .json({ success: false, message: 'Usuário não encontrado' });
+        .json({ success: false, message: 'User not found' });
     }
 
     if (!(await user.checkPassword(password))) {
       return res
         .status(401)
-        .json({ success: false, message: 'Senha não bate' });
+        .json({ success: false, message: 'Password does not match' });
     }
 
     const { id, name, avatar, replies } = user;

@@ -56,14 +56,14 @@ class UserController {
     if (userExists) {
       return res
         .status(400)
-        .json({ success: false, message: 'Usuário já existe' });
+        .json({ success: false, message: 'User already exists' });
     }
 
     if (req.body.avatar_id) {
       if (!(await File.findByPk(req.body.avatar_id))) {
         return res
           .status(400)
-          .json({ success: false, message: 'Avatar enviado não existe' });
+          .json({ success: false, message: 'Avatar uploaded does not exist' });
       }
     }
 
@@ -80,7 +80,7 @@ class UserController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
     }
 
@@ -90,7 +90,7 @@ class UserController {
       if (userExists) {
         return res
           .status(400)
-          .json({ success: false, message: 'Usuário já existe' });
+          .json({ success: false, message: 'User already exists' });
       }
     }
 
@@ -100,21 +100,21 @@ class UserController {
       if (usernameExists) {
         return res
           .status(400)
-          .json({ success: false, message: 'Username já utilizado' });
+          .json({ success: false, message: 'Username already used' });
       }
     }
 
     if (oldPassword && !(await user.checkPassword(oldPassword))) {
       return res
         .status(401)
-        .json({ success: false, message: 'Senha não bate' });
+        .json({ success: false, message: 'Password does not match' });
     }
 
     if (avatar_id) {
       if (!(await File.findByPk(avatar_id))) {
         return res
           .status(400)
-          .json({ success: false, message: 'Avatar enviado não existe' });
+          .json({ success: false, message: 'Avatar uploaded does not exist' });
       }
     }
 
@@ -147,22 +147,22 @@ class UserController {
     if (!user) {
       return res
         .status(401)
-        .json({ success: false, message: 'Usuário não encontrado' });
+        .json({ success: false, message: 'User not found' });
     }
 
     if (!(await user.checkPassword(req.body.password))) {
       return res
         .status(401)
-        .json({ success: false, message: 'Senha não bate' });
+        .json({ success: false, message: 'Password does not match' });
     }
 
     if (!(await User.destroy({ where: { id: req.userId } })))
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
-    return res.json({ success: true, message: 'Conta apagada' });
+    return res.json({ success: true, message: 'Account deleted' });
   }
 }
 

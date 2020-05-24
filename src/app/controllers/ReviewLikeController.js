@@ -16,7 +16,7 @@ class ReviewLikeController {
     if (!validReview) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode dar like neste review!',
+        message: "You can't like this review",
       });
     }
 
@@ -27,12 +27,12 @@ class ReviewLikeController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Review recebeu seu Like com sucesso',
+      message: 'Review received its Like successfully',
     });
   }
 
@@ -49,7 +49,7 @@ class ReviewLikeController {
     if (!validReview) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode dar like neste review!',
+        message: "You can't like this review",
       });
     }
 
@@ -60,12 +60,12 @@ class ReviewLikeController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Review teve seu Like removido com sucesso',
+      message: 'Review had its Like removed successfully',
     });
   }
 }

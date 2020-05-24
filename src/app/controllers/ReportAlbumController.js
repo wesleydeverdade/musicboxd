@@ -12,7 +12,7 @@ class ReportAlbumController {
     if (!album) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode reportar este álbum!',
+        message: 'You cannot report this album',
       });
     }
 
@@ -31,7 +31,7 @@ class ReportAlbumController {
 
     return res.json({
       success: true,
-      message: 'Álbum reportado com sucesso',
+      message: 'Album successfully reported',
     });
   }
 }

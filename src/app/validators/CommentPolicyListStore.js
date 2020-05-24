@@ -8,7 +8,7 @@ export default async (req, res, next) => {
         .required()
         .test(
           'testError',
-          'replies must be a number more than 0 e less than 2.',
+          'replies must be a number more than 0 e less than 2',
           (value) => value === 0 || value === 1 || value === 2
         ),
     });
@@ -19,7 +19,7 @@ export default async (req, res, next) => {
   } catch (err) {
     return res.status(400).json({
       success: false,
-      message: 'Falha de validação',
+      message: 'Validation failure',
       error: err.inner,
     });
   }

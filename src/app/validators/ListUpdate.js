@@ -23,7 +23,7 @@ export default async (req, res, next) => {
   } catch (err) {
     return res.status(400).json({
       success: false,
-      message: 'Falha de validação',
+      message: 'Validation failure',
       error: err.inner,
     });
   }

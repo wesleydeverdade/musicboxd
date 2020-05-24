@@ -26,7 +26,7 @@ class ListController {
     if (!(albums && albums.length > 0)) {
       return res
         .status(400)
-        .json({ success: false, message: 'Lista precisa de álbuns.' });
+        .json({ success: false, message: 'Accurate list of albums' });
     }
 
     const list = await List.create({
@@ -89,7 +89,7 @@ class ListController {
     if (!list) {
       return res
         .status(401)
-        .json({ success: false, message: 'Lista não pertece ao usuário' });
+        .json({ success: false, message: 'List does not belong to the user' });
     }
 
     await list.update({ name, description, public: public_list, ranked_list });
@@ -143,16 +143,16 @@ class ListController {
     if (!list) {
       return res
         .status(401)
-        .json({ success: false, message: 'Lista não encontrada' });
+        .json({ success: false, message: 'List not found' });
     }
 
     if (!(await List.destroy({ where: { id: list_id } })))
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
-    return res.json({ success: true, message: 'Lista apagada' });
+    return res.json({ success: true, message: 'List deleted' });
   }
 }
 

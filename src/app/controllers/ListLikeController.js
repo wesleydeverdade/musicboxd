@@ -16,7 +16,7 @@ class ListLikeController {
     if (!validList) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode dar like nesta lista!',
+        message: "You can't like this list",
       });
     }
 
@@ -27,12 +27,12 @@ class ListLikeController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Lista recebeu seu Like com sucesso',
+      message: 'List received its Like successfully',
     });
   }
 
@@ -49,7 +49,7 @@ class ListLikeController {
     if (!validList) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode dar like nesta lista!',
+        message: "You can't like this list",
       });
     }
 
@@ -60,12 +60,12 @@ class ListLikeController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Lista teve seu Like removido com sucesso',
+      message: 'List had its Like removed successfully',
     });
   }
 }

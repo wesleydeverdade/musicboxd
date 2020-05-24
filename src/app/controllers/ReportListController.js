@@ -12,7 +12,7 @@ class ReportListController {
     if (!list) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode reportar esta lista!',
+        message: 'You cannot report this list',
       });
     }
 
@@ -31,7 +31,7 @@ class ReportListController {
 
     return res.json({
       success: true,
-      message: 'Lista reportada com sucesso',
+      message: 'List successfully reported',
     });
   }
 }

@@ -17,9 +17,7 @@ class CommentListController {
     const list = await List.findByPk(list_id);
 
     if (!list) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Lista inválido.' });
+      return res.status(400).json({ success: false, message: 'Invalid list' });
     }
 
     const user = await User.findByPk(req.userId);
@@ -32,13 +30,13 @@ class CommentListController {
         if (!(await user_list.hasFollower(user))) {
           return res.json({
             success: false,
-            message: 'Apenas quem o dono da lista segue pode comentar.',
+            message: 'Only whoever follows the list can comment',
           });
         }
       } else if (list.allowed_replies === 2) {
         return res.json({
           success: false,
-          message: 'Apenas o dono da lista pode comentar.',
+          message: 'Only the list owner can comment',
         });
       }
     }
@@ -62,7 +60,7 @@ class CommentListController {
     if (!comment) {
       return res
         .status(400)
-        .json({ success: false, message: 'Comentário inválido.' });
+        .json({ success: false, message: 'Invalid comment' });
     }
 
     const user = await User.findByPk(req.userId);
@@ -70,7 +68,7 @@ class CommentListController {
     if (!(await comment.hasComment(user))) {
       return res.status(400).json({
         success: false,
-        message: 'Comentário não pertence ao usuário.',
+        message: 'Comment does not belong to the user',
       });
     }
 
@@ -97,7 +95,7 @@ class CommentListController {
     if (!comment) {
       return res
         .status(400)
-        .json({ success: false, message: 'Comentário inválido.' });
+        .json({ success: false, message: 'Invalid comment' });
     }
 
     const user = await User.findByPk(req.userId);
@@ -108,7 +106,7 @@ class CommentListController {
     if (!user_comment && list.user_id !== req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode apagar este comentário.',
+        message: 'You cannot delete this comment',
       });
     }
 
@@ -118,10 +116,10 @@ class CommentListController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
     comment.update({ deleted_by });
-    return res.json({ success: true, message: 'Comentário apagado' });
+    return res.json({ success: true, message: 'Comment deleted' });
   }
 }
 

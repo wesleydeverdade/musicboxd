@@ -7,7 +7,7 @@ class NetworkController {
     if (follow_user_id === req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode seguir a si mesmo!',
+        message: 'You cannot follow yourself',
       });
     }
 
@@ -16,7 +16,7 @@ class NetworkController {
     if (!validUser) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode seguir este usuário!',
+        message: 'You cannot follow this user',
       });
     }
 
@@ -26,12 +26,12 @@ class NetworkController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Usuário seguido com sucesso',
+      message: 'User followed successfully',
     });
   }
 
@@ -41,7 +41,7 @@ class NetworkController {
     if (follow_user_id === req.userId) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode desseguir a si mesmo!',
+        message: 'You cannot unfollow yourself',
       });
     }
 
@@ -50,7 +50,7 @@ class NetworkController {
     if (!validUser) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode seguir este usuário!',
+        message: 'You cannot follow this user',
       });
     }
 
@@ -60,12 +60,12 @@ class NetworkController {
       return res.json({
         success: false,
         message:
-          'Ocorreu um erro ao realizar a operação, tente novamente mais tarde.',
+          'An error occurred while performing the operation, please try again later',
       });
 
     return res.json({
       success: true,
-      message: 'Usuário desseguido com sucesso',
+      message: 'User successfully unfollowed',
     });
   }
 }

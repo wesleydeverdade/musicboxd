@@ -12,7 +12,7 @@ class ReportReviewController {
     if (!review) {
       return res.status(400).json({
         success: false,
-        message: 'Você não pode reportar este review!',
+        message: 'You cannot report this review',
       });
     }
 
@@ -31,7 +31,7 @@ class ReportReviewController {
 
     return res.json({
       success: true,
-      message: 'Review reportado com sucesso',
+      message: 'Review successfully reported',
     });
   }
 }

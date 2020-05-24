@@ -9,7 +9,7 @@ export default async (req, res, next) => {
         .required()
         .test(
           'testError',
-          'note must be a number more than 0 e less than 5, divisible by 0.5.',
+          'note must be a number more than 0 e less than 5, divisible by 0.5',
           (value) => value > 0 && value <= 5 && value % 0.5 === 0
         ),
       tags: Yup.array(),
@@ -27,7 +27,7 @@ export default async (req, res, next) => {
   } catch (err) {
     return res.status(400).json({
       success: false,
-      message: 'Falha de validação',
+      message: 'Validation failure',
       error: err.inner,
     });
   }
