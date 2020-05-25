@@ -32,6 +32,8 @@ import ValidateUserUpdate from './app/validators/UserUpdate';
 import ValidateUserDestroy from './app/validators/UserDestroy';
 
 import ValidateSessionStore from './app/validators/SessionStore';
+import ValidateForgotPassword from './app/validators/ForgotPassword';
+import ValidateResetPassword from './app/validators/ResetPassword';
 
 import ValidateReviewIndex from './app/validators/ReviewIndex';
 import ValidateReviewShow from './app/validators/ReviewShow';
@@ -107,6 +109,16 @@ routes.get('/lists/:list_id', ValidateListShow, ListController.show);
 
 routes.post('/users', ValidateUserStore, UserController.store);
 routes.post('/session', ValidateSessionStore, SessionController.store);
+routes.post(
+  '/forgot-password',
+  ValidateForgotPassword,
+  SessionController.forgotPassword
+);
+routes.post(
+  '/reset-password',
+  ValidateResetPassword,
+  SessionController.resetPassword
+);
 
 routes.use(authMiddleware);
 

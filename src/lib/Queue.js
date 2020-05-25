@@ -1,10 +1,11 @@
 import Bee from 'bee-queue';
 import * as Sentry from '@sentry/node';
 import UserStoreMail from '../app/jobs/UserStoreMail';
+import ForgotPasswordMail from '../app/jobs/ForgotPasswordMail';
 import redisConfig from '../config/redis';
 import sentryConfig from '../config/sentry';
 
-const jobs = [UserStoreMail];
+const jobs = [UserStoreMail, ForgotPasswordMail];
 
 class Queue {
   constructor() {

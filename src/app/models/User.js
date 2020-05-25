@@ -22,6 +22,8 @@ class User extends Model {
         password_hash: Sequelize.STRING,
         public_wishlist: Sequelize.BOOLEAN,
         replies: Sequelize.INTEGER, // 0 (anyone can reply), 1 (friends [people YOU follow]), 2 (Only You)
+        password_reset_token: Sequelize.STRING,
+        password_reset_expires: Sequelize.DATE,
       },
       {
         sequelize,
