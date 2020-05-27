@@ -1,4 +1,7 @@
 import { Router } from 'express';
+import Brute from 'express-brute';
+import BruteRedis from 'express-brute-redis';
+
 import multer from 'multer';
 import multerConfig from './config/multer';
 
@@ -25,8 +28,8 @@ import ReportListController from './app/controllers/ReportListController';
 import ReportCommentReviewController from './app/controllers/ReportCommentReviewController';
 import ReportCommentListController from './app/controllers/ReportCommentListController';
 
-import ValidateUserIndex from './app/validators/UserIndex';
-import ValidateUserShow from './app/validators/UserShow';
+// import ValidateUserIndex from './app/validators/UserIndex';
+// import ValidateUserShow from './app/validators/UserShow';
 import ValidateUserStore from './app/validators/UserStore';
 import ValidateUserUpdate from './app/validators/UserUpdate';
 import ValidateUserDestroy from './app/validators/UserDestroy';
@@ -35,14 +38,14 @@ import ValidateSessionStore from './app/validators/SessionStore';
 import ValidateForgotPassword from './app/validators/ForgotPassword';
 import ValidateResetPassword from './app/validators/ResetPassword';
 
-import ValidateReviewIndex from './app/validators/ReviewIndex';
-import ValidateReviewShow from './app/validators/ReviewShow';
+// import ValidateReviewIndex from './app/validators/ReviewIndex';
+// import ValidateReviewShow from './app/validators/ReviewShow';
 import ValidateReviewStore from './app/validators/ReviewStore';
 import ValidateReviewUpdate from './app/validators/ReviewUpdate';
 import ValidateReviewDestroy from './app/validators/ReviewDestroy';
 
-import ValidateListIndex from './app/validators/ListIndex';
-import ValidateListShow from './app/validators/ListShow';
+// import ValidateListIndex from './app/validators/ListIndex';
+// import ValidateListShow from './app/validators/ListShow';
 import ValidateListStore from './app/validators/ListStore';
 import ValidateListUpdate from './app/validators/ListUpdate';
 import ValidateListDestroy from './app/validators/ListDestroy';
@@ -92,23 +95,31 @@ import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 const upload = multer(multerConfig);
+const bruteStore = new BruteRedis({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+});
+
+const bruteForce = new Brute(bruteStore);
 
 routes.get('/find-album', SpotifyFind.search);
 routes.get('/get-album', SpotifyFind.album);
 routes.get('/get-artist', SpotifyFind.artist);
 
-/* ABRE - TEM QUE VER ESSA PORRA AÍ */
-routes.get('/users', ValidateUserIndex, UserController.index);
-routes.get('/reviews', ValidateReviewIndex, ReviewController.index);
-routes.get('/lists', ValidateListIndex, ListController.index);
-// // // // // // // // // // // // // // // // // // // // // // //
-routes.get('/users/:user_id', ValidateUserShow, UserController.show);
-routes.get('/reviews/:review_id', ValidateReviewShow, ReviewController.show);
-routes.get('/lists/:list_id', ValidateListShow, ListController.show);
-/* FECHA - TEM QUE VER ESSA PORRA AÍ */
+// routes.get('/users', ValidateUserIndex, UserController.index);
+// routes.get('/reviews', ValidateReviewIndex, ReviewController.index);
+// routes.get('/lists', ValidateListIndex, ListController.index);
+// routes.get('/users/:user_id', ValidateUserShow, UserController.show);
+// routes.get('/reviews/:review_id', ValidateReviewShow, ReviewController.show);
+// routes.get('/lists/:list_id', ValidateListShow, ListController.show);
 
 routes.post('/users', ValidateUserStore, UserController.store);
-routes.post('/session', ValidateSessionStore, SessionController.store);
+routes.post(
+  '/sessions',
+  bruteForce.prevent,
+  ValidateSessionStore,
+  SessionController.store
+);
 routes.post(
   '/forgot-password',
   ValidateForgotPassword,
