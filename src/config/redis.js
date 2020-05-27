@@ -1,4 +1,4 @@
-import 'dotenv/config';
+import '../bootstrap';
 
 export default {
   host: process.env.REDIS_HOST,

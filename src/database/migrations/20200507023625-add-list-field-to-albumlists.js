@@ -5,7 +5,6 @@ module.exports = {
       references: { model: 'lists', key: 'id' },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE',
-      allowNull: false,
     });
   },
 
