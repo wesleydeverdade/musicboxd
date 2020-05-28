@@ -33,7 +33,10 @@ class App {
       '/files',
       express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
     );
-    if (process.env.NODE_ENV !== 'development') {
+    if (
+      process.env.NODE_ENV !== 'development' &&
+      process.env.NODE_ENV !== 'test'
+    ) {
       this.server.use(
         new RateLimit({
           store: new RateLimitRedis({

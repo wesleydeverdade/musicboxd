@@ -85,6 +85,7 @@ class SessionController {
 
     return res.json({
       success: true,
+      token: password_reset_token,
       message:
         'An email has been sent with instructions on how to change your password',
     });

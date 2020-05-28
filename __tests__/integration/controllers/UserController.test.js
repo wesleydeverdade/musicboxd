@@ -1,7 +1,7 @@
 import request from 'supertest';
-import app from '../../src/app';
-import truncate from '../util/truncate';
-import factory from '../factories';
+import app from '../../../src/app';
+import truncate from '../../util/truncate';
+import factory from '../../factories';
 
 describe('User', () => {
   beforeEach(async () => {
