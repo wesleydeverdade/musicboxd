@@ -15,7 +15,7 @@ describe('Spotify', () => {
     const response = await request(app).get(
       '/find-album?album=asdfasdfafsafaf'
     );
-    expect(response.body.total).toBe(0);
+    expect(response.body.albums.total).toBe(0);
   });
 
   // GET get-album

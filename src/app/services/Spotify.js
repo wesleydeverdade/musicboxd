@@ -60,12 +60,8 @@ class Spotify {
       type: 'album',
     };
 
-    try {
-      const response = await axios.get(endpoint + qs.stringify(data), headers);
-      return response.data;
-    } catch (err) {
-      throw new Error('Error requesting album');
-    }
+    const response = await axios.get(endpoint + qs.stringify(data), headers);
+    return response.data;
   }
 
   async album({ id }) {
