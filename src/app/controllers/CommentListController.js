@@ -3,13 +3,13 @@ import List from '../models/List';
 import ListComment from '../models/ListComment';
 
 class CommentListController {
-  async index(req, res) {
+  /* async index(req, res) {
     return res.json(req.body);
-  }
+  } /*
 
-  async show(req, res) {
+  /* async show(req, res) {
     return res.json(req.body);
-  }
+  } */
 
   async store(req, res) {
     const { list_id, content } = req.body;

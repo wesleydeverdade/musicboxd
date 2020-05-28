@@ -5,43 +5,43 @@ import Tag from '../models/Tag';
 import Spotify from '../services/Spotify';
 
 class ReviewController {
-  async index(req, res) {
+  /* async index(req, res) {
     return res.json(req.body);
-    // const { page = 1, spotify_id, user_id } = req.query;
-    // /* filters */
-    // const options_review = { where: {} };
-    // const options_album = { where: {} };
-    // if (user_id) options_review.where.user_id = user_id;
-    // if (spotify_id) options_album.where.spotify_id = spotify_id;
-    // const reviews = await Review.findAll({
-    //   where: options_review.where,
-    //   limit: 20,
-    //   offset: (page - 1) * 20,
-    //   attributes: ['id', 'content', 'note', 'liked', 'user_id'],
-    //   include: [
-    //     {
-    //       model: Album,
-    //       as: 'review_album',
-    //       attributes: [
-    //         'album_name',
-    //         'album_artists',
-    //         'album_release_date',
-    //         'album_genres',
-    //       ],
-    //       where: options_album.where,
-    //     },
-    //     {
-    //       association: 'tags',
-    //       attributes: ['name'],
-    //     },
-    //   ],
-    // });
-    // return res.json(reviews);
-  }
+    const { page = 1, spotify_id, user_id } = req.query;
 
-  async show(req, res) {
+    const options_review = { where: {} };
+    const options_album = { where: {} };
+    if (user_id) options_review.where.user_id = user_id;
+    if (spotify_id) options_album.where.spotify_id = spotify_id;
+    const reviews = await Review.findAll({
+      where: options_review.where,
+      limit: 20,
+      offset: (page - 1) * 20,
+      attributes: ['id', 'content', 'note', 'liked', 'user_id'],
+      include: [
+        {
+          model: Album,
+          as: 'review_album',
+          attributes: [
+            'album_name',
+            'album_artists',
+            'album_release_date',
+            'album_genres',
+          ],
+          where: options_album.where,
+        },
+        {
+          association: 'tags',
+          attributes: ['name'],
+        },
+      ],
+    });
+    return res.json(reviews);
+  } */
+
+  /* async show(req, res) {
     return res.json(req.body);
-  }
+  } */
 
   async store(req, res) {
     const { spotify_id, content, liked, note, tags } = req.body;

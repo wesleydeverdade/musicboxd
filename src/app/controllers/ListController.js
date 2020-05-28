@@ -5,13 +5,13 @@ import ListAlbum from '../models/ListAlbum';
 import Tag from '../models/Tag';
 
 class ListController {
-  async index(req, res) {
+  /* async index(req, res) {
     return res.json(req.body);
-  }
+  } */
 
-  async show(req, res) {
+  /* async show(req, res) {
     return res.json(req.body);
-  }
+  } */
 
   async store(req, res) {
     const {

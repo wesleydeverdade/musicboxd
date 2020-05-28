@@ -7,46 +7,46 @@ import authConfig from '../../config/auth';
 // import Queue from '../../lib/Queue';
 
 class UserController {
-  async index(req, res) {
+  /* async index(req, res) {
     return res.json(req.body);
-    // const { page = 1 } = req.query;
+    const { page = 1 } = req.query;
 
-    // const users = await User.findAll({
-    //   where: {},
-    //   limit: 20,
-    //   offset: (page - 1) * 20,
-    //   attributes: [
-    //     'id',
-    //     'username',
-    //     'email',
-    //     'first_name',
-    //     'last_name',
-    //     'location',
-    //     'website',
-    //     'bio',
-    //     'people_section',
-    //     'first_favorite_album',
-    //     'second_favorite_album',
-    //     'third_favorite_album',
-    //     'fourth_favorite_album',
-    //     'fifth_favorite_album',
-    //     'avatar_id',
-    //   ],
-    //   include: [
-    //     {
-    //       model: File,
-    //       as: 'avatar',
-    //       attributes: ['name', 'path', 'url'],
-    //     },
-    //   ],
-    // });
+    const users = await User.findAll({
+      where: {},
+      limit: 20,
+      offset: (page - 1) * 20,
+      attributes: [
+        'id',
+        'username',
+        'email',
+        'first_name',
+        'last_name',
+        'location',
+        'website',
+        'bio',
+        'people_section',
+        'first_favorite_album',
+        'second_favorite_album',
+        'third_favorite_album',
+        'fourth_favorite_album',
+        'fifth_favorite_album',
+        'avatar_id',
+      ],
+      include: [
+        {
+          model: File,
+          as: 'avatar',
+          attributes: ['name', 'path', 'url'],
+        },
+      ],
+    });
 
-    // return res.json(users);
-  }
+    return res.json(users);
+  } */
 
-  async show(req, res) {
+  /* async show(req, res) {
     return res.json(req.body);
-  }
+  } */
 
   async store(req, res) {
     const userExists = await User.findOne({
