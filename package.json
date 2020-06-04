@@ -8,7 +8,7 @@
     "queue": "nodemon src/queue.js",
     "beautify": "yarn eslint --fix src --ext .js",
     "pretest": "cross-env NODE_ENV=test sequelize db:migrate",
-    "test": "cross-env NODE_ENV=test jest",
+    "test": "cross-env NODE_ENV=test jest --runInBand --forceExit",
     "posttest": "cross-env NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "dependencies": {

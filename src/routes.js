@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import Brute from 'express-brute';
-import BruteRedis from 'express-brute-redis';
+// import Brute from 'express-brute';
+// import BruteRedis from 'express-brute-redis';
 
 import multer from 'multer';
 import multerConfig from './config/multer';
@@ -95,12 +95,12 @@ import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 const upload = multer(multerConfig);
-const bruteStore = new BruteRedis({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
-});
+// const bruteStore = new BruteRedis({
+//   host: process.env.REDIS_HOST,
+//   port: process.env.REDIS_PORT,
+// });
 
-const bruteForce = new Brute(bruteStore);
+// const bruteForce = new Brute(bruteStore);
 
 routes.get('/find-album', SpotifyFind.search);
 routes.get('/get-album', SpotifyFind.album);
@@ -116,7 +116,7 @@ routes.get('/get-artist', SpotifyFind.artist);
 routes.post('/users', ValidateUserStore, UserController.store);
 routes.post(
   '/sessions',
-  bruteForce.prevent,
+  // bruteForce.prevent,
   ValidateSessionStore,
   SessionController.store
 );

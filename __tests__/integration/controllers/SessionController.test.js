@@ -1,4 +1,5 @@
 import request from 'supertest';
+import path from 'path';
 import app from '../../../src/app';
 import truncate from '../../util/truncate';
 import factory from '../../factories';
@@ -38,6 +39,10 @@ describe('Sessions', () => {
     });
     expect(response.status).toBe(401);
   });
+  it('should not be able to auth with invalid parameters', async () => {
+    const response = await request(app).post('/sessions').send();
+    expect(response.status).toBe(400);
+  });
   // POST /forgot-password
   it('should be able to recover password', async () => {
     const user = await factory.create('User', {
@@ -57,6 +62,10 @@ describe('Sessions', () => {
       password: user.password,
     });
     expect(response.status).toBe(401);
+  });
+  it('should not be able to recover password with invalid parameters', async () => {
+    const response = await request(app).post('/forgot-password').send();
+    expect(response.status).toBe(400);
   });
   // POST /reset-password
   it('should be able to reset password', async () => {
@@ -102,6 +111,10 @@ describe('Sessions', () => {
     });
     expect(response.status).toBe(401);
   });
+  it('should not be able to recover password with invalid parameters', async () => {
+    const response = await request(app).post('/reset-password').send();
+    expect(response.status).toBe(400);
+  });
 
   it('should be able to access private routes when authenticated', async () => {
     const user = await factory.create('User', {
@@ -113,41 +126,33 @@ describe('Sessions', () => {
     });
 
     const { token } = sessions.body;
+    const testImage = path.resolve(__dirname, '..', '..', 'factory-avatar.png');
 
     const response = await request(app)
-      .post('/reviews')
+      .post('/files')
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        spotify_id: '04mkS7FooK8fRbB626T9NR',
-        content: 'Não é o melhor Ventura',
-        liked: true,
-        note: 5,
-      });
+      .attach('file', testImage, { contentType: 'application/octet-stream' });
 
     expect(response.status).toBe(200);
   });
 
   it('should not be able to access private routes without token', async () => {
-    const response = await request(app).post('/reviews').send({
-      spotify_id: '04mkS7FooK8fRbB626T9NR',
-      content: 'Não é o melhor Ventura',
-      liked: true,
-      note: 5,
-    });
+    const testImage = path.resolve(__dirname, '..', '..', 'factory-avatar.png');
+    const response = await request(app)
+      .post('/files')
+      .attach('file', testImage, { contentType: 'application/octet-stream' });
+
     expect(response.status).toBe(401);
   });
 
   it('should not be able to access private routes with invalid token', async () => {
-    const token = '04mkS7FooK8fRbB626T9NR';
+    const token = 'asdaf';
+    const testImage = path.resolve(__dirname, '..', '..', 'factory-avatar.png');
     const response = await request(app)
-      .post('/reviews')
+      .post('/files')
       .set('Authorization', `Bearer ${token}`)
-      .send({
-        spotify_id: '04mkS7FooK8fRbB626T9NR',
-        content: 'Não é o melhor Ventura',
-        liked: true,
-        note: 5,
-      });
+      .attach('file', testImage, { contentType: 'application/octet-stream' });
+
     expect(response.status).toBe(401);
   });
 });

@@ -11,6 +11,7 @@ describe('User', () => {
   // POST METHOD
 
   it('should encrypt user password when new user created', async () => {
+    jest.setTimeout(30000);
     const user = await factory.create('User', {
       password: '12345678',
     });
@@ -24,20 +25,20 @@ describe('User', () => {
     expect(response.body).toHaveProperty('id');
   });
 
-  it('should note be able to register with duplicated email', async () => {
+  it('should not be able to register with duplicated email', async () => {
     const user = await factory.attrs('User');
     await request(app).post('/users').send(user);
     const response = await request(app).post('/users').send(user);
     expect(response.status).toBe(400);
   });
 
-  it('should note be able to register with invalid avatar_id', async () => {
+  it('should not be able to register with invalid avatar_id', async () => {
     const user = await factory.attrs('User', { avatar_id: 90329103 });
     const response = await request(app).post('/users').send(user);
     expect(response.status).toBe(400);
   });
 
-  it('should note be able to register with invalid data', async () => {
+  it('should not be able to register with invalid data', async () => {
     const response = await request(app).post('/users').send({
       username: 'wes',
       email: 'wes',
