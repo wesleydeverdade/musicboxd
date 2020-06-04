@@ -17,7 +17,7 @@ class ReviewCommentLikeController {
     const user = await User.findByPk(req.userId);
 
     if (!(await comment.addLike(user)))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -44,7 +44,7 @@ class ReviewCommentLikeController {
     const user = await User.findByPk(req.userId);
 
     if (!(await comment.removeLike(user)))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

@@ -158,7 +158,7 @@ class ReviewController {
     }
 
     if (!(await Review.destroy({ where: { id: review_id } })))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

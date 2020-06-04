@@ -147,7 +147,7 @@ class ListController {
     }
 
     if (!(await List.destroy({ where: { id: list_id } })))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

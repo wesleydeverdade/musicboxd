@@ -114,7 +114,7 @@ class CommentReviewController {
     if (review.user_id === req.userId) deleted_by = 1;
 
     if (!(await ReviewComment.destroy({ where: { id: comment_id } })))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

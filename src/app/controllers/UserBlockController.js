@@ -23,7 +23,7 @@ class UserBlockController {
     const user = await User.findByPk(req.userId);
 
     if (!(await user.addBlock(validUser)))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -57,7 +57,7 @@ class UserBlockController {
     const user = await User.findByPk(req.userId);
 
     if (!(await user.removeBlock(validUser)))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

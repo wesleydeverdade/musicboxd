@@ -35,7 +35,7 @@ class WishlistController {
     const user = await User.findByPk(req.userId);
 
     if (!(await album.addUser(user)))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -60,7 +60,7 @@ class WishlistController {
       });
 
     if (!(await album.removeUser(user)))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -78,7 +78,7 @@ class WishlistController {
     const user = await User.findByPk(req.userId);
 
     if (!(await user.update({ public_wishlist })))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -96,7 +96,7 @@ class WishlistController {
     const user = await User.findByPk(req.userId);
 
     if (!(await user.update({ public_wishlist })))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

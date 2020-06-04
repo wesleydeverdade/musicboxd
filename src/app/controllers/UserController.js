@@ -85,7 +85,7 @@ class UserController {
     const user = await User.findByPk(req.userId);
 
     if (!user) {
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -165,7 +165,7 @@ class UserController {
     }
 
     if (!(await User.destroy({ where: { id: req.userId } })))
-      return res.json({
+      return res.status(400).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
