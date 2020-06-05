@@ -23,7 +23,7 @@ class NetworkController {
     const user = await User.findByPk(req.userId);
 
     if (!(await user.addFollower(validUser)))
-      return res.status(400).json({
+      return res.status(503).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -57,7 +57,7 @@ class NetworkController {
     const user = await User.findByPk(req.userId);
 
     if (!(await user.removeFollower(validUser)))
-      return res.status(400).json({
+      return res.status(503).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

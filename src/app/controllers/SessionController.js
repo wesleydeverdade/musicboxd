@@ -70,7 +70,7 @@ class SessionController {
     if (
       !(await user.update({ password_reset_token, password_reset_expires }))
     ) {
-      return res.status(400).json({
+      return res.status(503).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -123,7 +123,7 @@ class SessionController {
         password,
       }))
     ) {
-      return res.status(400).json({
+      return res.status(503).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',

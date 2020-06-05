@@ -24,7 +24,7 @@ class ReviewLikeController {
     const user = await User.findByPk(req.userId);
 
     if (!(await review.addUser(user)))
-      return res.status(400).json({
+      return res.status(503).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
@@ -57,7 +57,7 @@ class ReviewLikeController {
     const user = await User.findByPk(req.userId);
 
     if (!(await review.removeUser(user)))
-      return res.status(400).json({
+      return res.status(503).json({
         success: false,
         message:
           'An error occurred while performing the operation, please try again later',
