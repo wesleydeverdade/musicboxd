@@ -5,6 +5,10 @@ import truncate from '../../util/truncate';
 import factory from '../../factories';
 
 describe('Sessions', () => {
+  beforeAll(async () => {
+    jest.setTimeout(30000);
+  });
+
   beforeEach(async () => {
     await truncate();
   });
@@ -18,6 +22,13 @@ describe('Sessions', () => {
       password: user.password,
     });
     expect(response.body).toHaveProperty('token');
+  });
+  it('should not be able to auth with invalid data', async () => {
+    const response = await request(app).post('/sessions').send({
+      email: 13441234,
+      password: true,
+    });
+    expect(response.status).toBe(400);
   });
   it('should not be able to auth with different passwords', async () => {
     const user = await factory.create('User', {

@@ -4,6 +4,10 @@ import truncate from '../../util/truncate';
 import factory from '../../factories';
 
 describe('User', () => {
+  beforeAll(async () => {
+    jest.setTimeout(30000);
+  });
+
   beforeEach(async () => {
     await truncate();
   });
