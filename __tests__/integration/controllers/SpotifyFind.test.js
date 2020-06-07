@@ -2,10 +2,6 @@ import request from 'supertest';
 import app from '../../../src/app';
 
 describe('Spotify', () => {
-  beforeAll(async () => {
-    jest.setTimeout(30000);
-  });
-
   // GET find-album
   it('should be able to find an album by name', async () => {
     const response = await request(app).get('/find-album?album=nevermind');

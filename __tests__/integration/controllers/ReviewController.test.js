@@ -8,7 +8,6 @@ let token = '';
 
 describe('Reviews', () => {
   beforeAll(async () => {
-    jest.setTimeout(30000);
     token = await jwt();
   });
   afterAll(async () => {

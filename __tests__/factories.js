@@ -3,6 +3,7 @@ import { factory } from 'factory-girl';
 import User from '../src/app/models/User';
 import File from '../src/app/models/File';
 import Review from '../src/app/models/Review';
+import List from '../src/app/models/List';
 
 factory.define('User', User, {
   username: faker.internet.userName(),
@@ -41,7 +42,22 @@ factory.define('Review', Review, {
   content: faker.lorem.sentences(),
   liked: faker.random.boolean(),
   note: 5,
-  // tags: ['00s', 'Good'],
+  // tags: [faker.lorem.words(), faker.lorem.words()],
+});
+
+factory.define('List', List, {
+  name: faker.lorem.words(),
+  description: faker.lorem.sentences(),
+  public_list: faker.random.boolean(),
+  ranked_list: faker.random.boolean(),
+  tags: [faker.lorem.words(), faker.lorem.words()],
+  albums: [
+    { spotify_id: '04mkS7FooK8fRbB626T9NR', note: faker.lorem.sentences() },
+    { spotify_id: '2guirTSEqLizK7j9i1MTTZ', note: faker.lorem.sentences() },
+    { spotify_id: '0ZV52q6eXsblxz89BbCL5H', note: faker.lorem.sentences() },
+    { spotify_id: '0QMVSKhzT4u2DEd8qdlz4I', note: faker.lorem.sentences() },
+    { spotify_id: '002IhaQrqlVoyLhsTlzLd8', note: faker.lorem.sentences() },
+  ],
 });
 
 export default factory;
