@@ -4,6 +4,7 @@ import User from '../src/app/models/User';
 import File from '../src/app/models/File';
 import Review from '../src/app/models/Review';
 import List from '../src/app/models/List';
+import Album from '../src/app/models/Album';
 
 factory.define('User', User, {
   username: faker.internet.userName(),
@@ -37,6 +38,14 @@ factory.define('UserUpdate', User, {
 // "0QMVSKhzT4u2DEd8qdlz4I", "04mkS7FooK8fRbB626T9NR", "002IhaQrqlVoyLhsTlzLd8"
 // "1Mdy7hhoQRYdVrHzYnlUee", "28yHV3Gdg30AiB8h8em1eW"
 
+factory.define('Album', Album, {
+  // spotify_id: '',
+  album_name: faker.lorem.words(),
+  album_artists: {},
+  album_release_date: new Date(),
+  album_genres: {},
+});
+
 factory.define('Review', Review, {
   spotify_id: '04mkS7FooK8fRbB626T9NR',
   content: faker.lorem.sentences(),
@@ -50,7 +59,7 @@ factory.define('List', List, {
   description: faker.lorem.sentences(),
   public_list: faker.random.boolean(),
   ranked_list: faker.random.boolean(),
-  tags: [faker.lorem.words(), faker.lorem.words()],
+  // tags: [faker.lorem.words()],
   albums: [
     { spotify_id: '04mkS7FooK8fRbB626T9NR', note: faker.lorem.sentences() },
     { spotify_id: '2guirTSEqLizK7j9i1MTTZ', note: faker.lorem.sentences() },

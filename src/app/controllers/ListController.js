@@ -23,11 +23,7 @@ class ListController {
       tags,
     } = req.body;
 
-    if (!(albums && albums.length > 0)) {
-      return res
-        .status(400)
-        .json({ success: false, message: 'Accurate list of albums' });
-    }
+    // validação para verificar se dentro do que vem de álbum tem spotify_id
 
     const list = await List.create({
       name,
